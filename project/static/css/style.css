@@ -1,7 +1,29 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.center{
+  width: 50%;
+  height: 50%;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+}
+
+.checked {
+  color: orange;
+}
+
+.fa-star{
+  font-size: 15px;
+}
+
 .div-center {
   width: 400px;
   height: 400px;
-  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -17,7 +39,6 @@
 .div-center2 {
   width: 500px;
   height: 400px;
-  position: absolute;
   left: 0;
   right: 0;
   top: 0;
@@ -35,3 +56,41 @@ div.login-form {
   display: table-cell;
   vertical-align: middle;
 }
+
+
+
+  /* Styling h1 and links
+––––––––––––––––––––––––––––––––– */
+
+
+  .starrating>input {
+    display: none;
+  }
+
+  /* Remove radio buttons */
+
+  .starrating>label:before {
+    content: "\f005";
+    /* Star */
+    margin: 5px;
+    font-size: 2em;
+    font-family: FontAwesome;
+    display: inline-block;
+  }
+
+  .starrating>label {
+    color: #222222;
+    /* Start color when not clicked */
+  }
+
+  .starrating>input:checked~label {
+    color: #ffca08;
+  }
+
+  /* Set yellow color when star checked */
+
+  .starrating>input:hover~label {
+    color: #ffca08;
+  }
+
+  /* Set yellow color when star hover */

@@ -7,10 +7,11 @@ from flask_login import (
     current_user,
 )
 from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
 from models.model_user import UsersModel
 from forms.form_user import UserForm, LoginForm
 
+
+db = SQLAlchemy()
 
 userbp = Blueprint(
     "userbp",
@@ -23,23 +24,23 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         user = UsersModel.query.filter_by(username=form.username.data).first()
-        if user:    
+        if user:
             if user.verify_password(form.password.data):
                 remember = True if form.remember.data else False
                 login_user(user, remember=remember)
-                return render_template("post/dashboard.html")
+                return redirect(url_for("ratebp.dashboard"))
             else:
-                flash("Wrong Username or Password - Try Again!", category='warning')
+                flash("Wrong Username or Password - Try Again!", category="warning")
         else:
-            flash("That User do not exists - Try Again!", category='warning')
+            flash("That User do not exists - Try Again!", category="warning")
     return render_template("user/login.html", form=form)
 
 
-@userbp.route('/logout', methods=['GET', 'POST'])
+@userbp.route("/logout", methods=["GET", "POST"])
 def logout():
-  logout_user()
-  flash('Logout!', category='success')
-  return redirect(url_for('userbp.login'))
+    logout_user()
+    flash("Logout!", category="success")
+    return redirect(url_for("userbp.login"))
 
 
 @userbp.route("/register", methods=["GET", "POST"])

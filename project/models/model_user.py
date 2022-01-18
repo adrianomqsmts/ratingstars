@@ -11,8 +11,8 @@ class UsersModel(db.Model, UserMixin):
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     password_hash = db.Column(db.String(128))
     profile_pic = db.Column(db.String(), nullable=True)
-    # User can have many Posts {post.poster.email}
-    # posts = db.relationship("Posts", backref="poster")
+    # User can have many Rates {post.rater.email}
+    rates = db.relationship("RatingModel", backref="rater")
 
     @property
     def password(self):
@@ -27,3 +27,5 @@ class UsersModel(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<Name: {self.name}>"
+
+from models.model_rate import RatingModel

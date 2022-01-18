@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
+{% block title %}Login{% endblock title %}
+
+
 {% block content %}
 
-
-
-
 {% for category, message in get_flashed_messages(with_categories=True) %}
-<div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+<div class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show" role="alert">
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   <strong>{{message}}</strong>
 </div>
