@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    <span class="sr-only">Close</span>
+  </button>
+  <strong>{{ message }}</strong>
+</div>
+{% endfor %}
+
+<div class="div-center2">
+  <div class="register-form">
+    <div class="card text-start">
+      <div class="card-body text-dark">
+        <h4 class="card-title text-center">Register</h4>
+        <hr>
+        <form action="" method="POST">
+          {{form.hidden_tag()}}
+          {{form.name.label(class="form-label")}}:
+          {{form.name(class="form-text form-control")}}
+          {{form.username.label(class="form-label")}}
+          {{form.username(class="form-text form-control")}}
+          {{form.email.label(class="form-label")}}
+          {{form.email(class="form-email form-control")}}
+          {{form.password.label(class="form-label")}}
+          {{form.password(class="form-password form-control")}}
+          {{form.password2.label(class="form-label")}}
+          {{form.password2(class="form-password form-control")}}
+          <br>
+          {{form.submit(class="btn btn-primary w-100")}}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
