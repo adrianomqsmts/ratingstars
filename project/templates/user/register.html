@@ -18,18 +18,24 @@
         <form action="" method="POST">
           {{form.hidden_tag()}}
           {{form.name.label(class="form-label")}}:
-          {{form.name(class="form-text form-control")}}
+          {{form.name(class="form-control")}}
           {{form.username.label(class="form-label")}}
-          {{form.username(class="form-text form-control")}}
+          {{form.username(class="form-control")}}
           {{form.email.label(class="form-label")}}
-          {{form.email(class="form-email form-control")}}
+          {{form.email(class=" form-control")}}
+          {{form.profile_pic.label(class="form-label")}}
+          {{form.profile_pic(class="form-control")}}
+          {{form.about.label(class="form-label")}}
+          {{form.about(class=" form-control")}}
           {{form.password.label(class="form-label")}}
-          {{form.password(class="form-password form-control")}}
+          {{form.password(class="form-control")}}
           {{form.password2.label(class="form-label")}}
-          {{form.password2(class="form-password form-control")}}
+          {{form.password2(class="form-control")}}
           <br>
           {{form.submit(class="btn btn-primary w-100")}}
         </form>
+        {{ ckeditor.load() }}
+        {{ ckeditor.config(name = 'content', showWordCount = True) }}
       </div>
     </div>
   </div>

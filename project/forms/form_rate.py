@@ -18,10 +18,6 @@ class RateForm(FlaskForm):
     original_title = StringField("Original Title")
     # content = StringField('Content', validators=[DataRequired()], widget=TextArea())
     content = CKEditorField("Content", validators=[DataRequired()])
-    # rate = IntegerField(
-    #    "Rate",
-    #    validators=[DataRequired(), Length(min=0, max=5, message="Invalid Range")],
-    # )
     rate = RadioField(
         "Rate",
         validators=[DataRequired()],

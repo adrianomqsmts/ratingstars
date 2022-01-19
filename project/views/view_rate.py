@@ -14,7 +14,7 @@ ratebp = Blueprint(
 @ratebp.route("/dashboard")
 @login_required
 def dashboard():
-    rates = RatingModel.query.all()
+    rates = RatingModel.query.filter_by(rater_id=current_user.id).all()
     return render_template("rate/dashboard.html", rates=rates)
 
 

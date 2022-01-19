@@ -7,3 +7,5 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///bd.sqlite3'  # Turn off the Flask-SQLAlchem
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 CKEDITOR_PKG_TYPE = 'basic'
+
+UPLOAD_FOLDER = 'static/images'

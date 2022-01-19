@@ -14,13 +14,22 @@
   <div class="card-body">
     <div class='container'>
       <div class='row'>
-        <div class='col-6 h-25 w-25 text-right'>
-          <img src="{{ url_for('static', filename='images/' + (current_user.profile_pic if current_user.profile_pic else 'profile.png')) }}" alt="Profile Pic" width='100%' height='100%' style="float: right;">
+        <div class='col-2'>
+          <div id="wrapper">
+            <img class="img-fluid profile-pic rounded-circle border-dark" src="{{ url_for('static', filename='images/' + (current_user.profile_pic if current_user.profile_pic else 'profile.png')) }}" alt="Profile Pic">
+            <a href="{{ url_for('userbp.pic_update') }}" class="a-text">
+              <div class="text text-center center h-100 w-100">Update Image</div>
+            </a>
+          </div>
+          </a>
         </div>
-        <div class='col-6 text-left'>
-          <p class="card-title display-3">{{current_user.name}}
+        <div class='col-8'>
+          <p class="card-title display-5  text-center">{{current_user.name}}
           <p>
-          <p class="card-text lead">{{current_user.email}}</p>
+          <p class="lead">{{ current_user.about | safe}}</p>
+        </div>
+        <div class='col-2 text-right'>
+          <a href="{{ url_for('userbp.update') }}" class="btn btn-primary w-100"><i class="fas fa-edit"></i></a>
         </div>
       </div>
     </div>
@@ -37,12 +46,14 @@
 {% for rate in rates %}
 <div class="card text-start text-dark mb-2">
   <div class="card-body">
-    <div class="row">
-      <div class="col-10"><h4 class="card-title">{{rate.title}}</h4></div>
-       <div class="col-2">
-         <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-         <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
-       </div>
+    <div class="row w-100">
+      <div class="col-10">
+        <h4 class="card-title">{{rate.title}}</h4>
+      </div>
+      <div class="col-2 d-flex">
+        <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="w-50 btn btn-primary"><i class="fas fa-edit"></i></a>
+        <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="w-50 btn btn-danger"><i class="far fa-trash-alt"></i></a>
+      </div>
     </div>
     <p class="card-text">
       {% for i in range(rate.rate) %}
@@ -50,7 +61,7 @@
       {% endfor %}
       {% for i in range(5-rate.rate) %}
       <span class="fa fa-star"></span>
-      {% endfor %}  | {{rate.date_posted.strftime('%Y-%m-%d')}}
+      {% endfor %} | {{rate.date_posted.strftime('%Y-%m-%d')}}
     </p>
     <hr>
     <p class="card-text">{{rate.content|safe}}</p>

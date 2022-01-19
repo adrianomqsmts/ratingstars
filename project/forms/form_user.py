@@ -10,6 +10,7 @@ from wtforms import (
 )
 from wtforms.validators import DataRequired, EqualTo, Length
 from wtforms.widgets import TextArea
+from flask_ckeditor import CKEditorField
 
 
 class LoginForm(FlaskForm):
@@ -18,6 +19,20 @@ class LoginForm(FlaskForm):
     remember = BooleanField("Remember Me")
     submit = SubmitField("Login")
 
+
+class UpdateForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired(), Length(min=3, max=25)])
+    username = StringField(
+        "Username", validators=[DataRequired(), Length(min=4, max=25)]
+    )
+    about = CKEditorField("Content", validators=[DataRequired()])
+    #profile_pic = FileField("Profile Pic")
+    submit = SubmitField("Update")
+
+
+class UpdatePicForm(FlaskForm):
+    profile_pic = FileField("Profile Pic")
+    submit = SubmitField("Update")
 
 class UserForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired(), Length(min=3, max=25)])
