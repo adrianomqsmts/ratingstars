@@ -6,12 +6,11 @@ from flask_login import (
     logout_user,
     current_user,
 )
-from flask_sqlalchemy import SQLAlchemy
+from database import db
 from models.model_user import UsersModel
 from forms.form_user import UserForm, LoginForm
 
 
-db = SQLAlchemy()
 
 userbp = Blueprint(
     "userbp",

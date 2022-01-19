@@ -20,22 +20,25 @@
         <form action="" method="POST">
           {{form.hidden_tag()}}
           {{form.title.label(class="form-label")}}:
-          {{form.title(class="form-control")}}
+          {{form.title(class="form-control", value=rate.title)}}
 
           {{form.original_title.label(class="form-label")}}:
-          {{form.original_title(class="form-control")}}
+          {{form.original_title(class="form-control", value=rate.original_title)}}
 
           {{form.content.label(class="form-label")}}:
           {{form.content(class="form-control")}}
           <br>
-          {{form.rate.label(class="form-label")}}: 
+          {{form.rate.label(class="form-label")}}:
           <div class="container">
             <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
               {% for subfield in form.rate %}
-
+              {% if subfield.data == rate.rate %}
+              {{ subfield(checked=True) }}
+              {{ subfield.label }}
+              {% else %}
               {{ subfield }}
               {{ subfield.label }}
-
+              {% endif %}
               {% endfor %}
             </div>
           </div>
@@ -43,7 +46,7 @@
           {{form.submit(class="btn btn-primary w-100")}}
         </form>
         {{ ckeditor.load() }}
-        {{ ckeditor.config(name = 'content', showWordCount = True) }}
+        {{ ckeditor.config(name = 'content', value=rate.content, showWordCount = True) }}
       </div>
     </div>
   </div>

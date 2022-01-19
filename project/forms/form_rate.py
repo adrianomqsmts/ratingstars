@@ -25,6 +25,6 @@ class RateForm(FlaskForm):
     rate = RadioField(
         "Rate",
         validators=[DataRequired()],
-        choices=[("1", ""), ("2", ""), ("3", ""), ("4", ""), ("5", "")]
+        choices=[(5, "5"), (4, "4"), (3, "3"), (2, "2"), (1, "1")],
     )
     submit = SubmitField("Rate")
