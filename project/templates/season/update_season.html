@@ -17,27 +17,24 @@
       <div class="card-body text-dark">
         <h4 class="card-title text-center">Rate</h4>
         <hr>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
           {{form.hidden_tag()}}
+
           {{form.title.label(class="form-label")}}:
-          {{form.title(class="form-control")}}
+          {{form.title(class="form-control", value=season.title)}}
 
-          {{form.original_title.label(class="form-label")}}:
-          {{form.original_title(class="form-control")}}
-
-          {{form.rate_type.label(class="form-label")}}:
-          {{form.rate_type(class="form-control")}}
+          {{form.season.label(class="form-label")}}:
+          {{form.season(class="form-control", value=season.season)}}
 
           {{form.content.label(class="form-label")}}:
-          {{form.content(class="form-control")}}
-
+          {{form.content(class="form-control", value=season.content)}}
 
           <br>
           {{form.rate.label(class="form-label")}}:
           <div class="container">
             <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
               {% for subfield in form.rate %}
-              {% if subfield.data == rate.rate %}
+              {% if subfield.data == season.rate %}
               {{ subfield(checked=True) }}
               {{ subfield.label }}
               {% else %}
@@ -51,7 +48,7 @@
           {{form.submit(class="btn btn-primary w-100")}}
         </form>
         {{ ckeditor.load() }}
-        {{ ckeditor.config(name = 'content', value=rate.content, showWordCount = True) }}
+        {{ ckeditor.config(name = 'content', showWordCount = True) }}
       </div>
     </div>
   </div>

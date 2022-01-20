@@ -12,6 +12,7 @@ from forms.form_user import UserForm, LoginForm, UpdateForm, UpdatePicForm
 from werkzeug.utils import secure_filename
 import uuid as uuid
 import os
+from upload import image_upload,  image_remove_and_upload
 
 
 userbp = Blueprint(
@@ -49,24 +50,14 @@ def register():
     form = UserForm()
     if form.validate_on_submit():  # Verify form fields
         user = UsersModel().query.filter_by(email=form.email.data).first()
-
         if user is None:  # if already exister that user.email
-            if request.files["profile_pic"]:
-                profile_pic = request.files["profile_pic"]
-
-                # FILENAME
-                pic_filename = secure_filename(profile_pic.filename)
-                pic_name = str(uuid.uuid1()) + "_" + pic_filename
-                # SAVE IN FOLDER
-                profile_pic.save(os.path.join(path, pic_name))
-
-                profile_pic = pic_name
-            else:
-                profile_pic = None
+            # Upload file and get name
+            profile_pic = image_upload(request.files["profile_pic"])
 
             new_user = UsersModel(
                 name=form.name.data,
                 username=form.username.data,
+                about=form.about.data,
                 email=form.email.data,
                 password=form.password.data,
                 profile_pic=profile_pic,
@@ -87,6 +78,7 @@ def register():
         form.email.data = ""
         form.username.data = ""
         form.password.data = ""
+        form.about.data = ""
 
     return render_template("user/register.html", form=form)
 
@@ -121,23 +113,7 @@ def pic_update():
     user = UsersModel.query.get_or_404(id)
     path = "static/images"
     if request.method == "POST":
-        if request.files["profile_pic"]:
-            if user.profile_pic and os.path.isfile(os.path.join(path, user.profile_pic)):
-                os.remove(os.path.join(path, user.profile_pic))
-
-            user.profile_pic = request.files["profile_pic"]
-
-            # FILENAME
-            pic_filename = secure_filename(user.profile_pic.filename)
-            pic_name = str(uuid.uuid1()) + "_" + pic_filename
-            # SAVE IN FOLDER
-            user.profile_pic.save(os.path.join(path, pic_name))
-
-            user.profile_pic = pic_name
-        else:
-            if user.profile_pic and os.path.isfile(os.path.join(path, user.profile_pic)):
-                os.remove(os.path.join(path, user.profile_pic))
-            user.profile_pic = None
+        image_remove_and_upload(request.files['profile_pic'], user.profile_pic)
         try:
             db.session.add(user)
             db.session.commit()

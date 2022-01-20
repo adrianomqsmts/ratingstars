@@ -37,19 +37,15 @@
                 <a class="nav-link" href="{{ url_for('userbp.register') }}">Register</a>
               </li>
               {% endif %}
-
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownId">
-                  <a class="dropdown-item" href="#">Action 1</a>
-                  <a class="dropdown-item" href="#">Action 2</a>
-                </div>
-              </li>
             </ul>
-            <form class="d-flex my-2 my-lg-0">
-              <input class="form-control me-sm-2" type="text" placeholder="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            {% if current_user.is_authenticated %}
+            <form class="d-flex my-2 my-lg-0" action="{{url_for('ratebp.search')}}" method="POST">
+              {{form.hidden_tag()}}
+              {{form.search(class="form-control me-sm-2", placeholder="Search")}}
+
+              {{form.submit(class="btn btn-outline-success my-2 my-sm-0")}}
             </form>
+            {% endif %}
           </div>
         </div>
       </nav>

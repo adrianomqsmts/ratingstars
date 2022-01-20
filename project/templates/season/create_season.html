@@ -17,27 +17,31 @@
       <div class="card-body text-dark">
         <h4 class="card-title text-center">Rate</h4>
         <hr>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
           {{form.hidden_tag()}}
+
           {{form.title.label(class="form-label")}}:
           {{form.title(class="form-control")}}
+          {% for error in form.title.errors %} {{ error }} {% endfor%}
 
-          {{form.original_title.label(class="form-label")}}:
-          {{form.original_title(class="form-control")}}
+          {{form.season.label(class="form-label")}}:
+          {{form.season(class="form-control")}}
+          {% for error in form.season.errors %} {{ error }} {% endfor%}
 
-          {{form.rate_type.label(class="form-label")}}:
-          {{form.rate_type(class="form-control")}}
+          {{form.season_pic.label(class="form-label")}}:
+          {{form.season_pic(class="form-control")}}
+          {% for error in form.season_pic.errors %} {{ error }} {% endfor%}
 
           {{form.content.label(class="form-label")}}:
           {{form.content(class="form-control")}}
-
+          {% for error in form.content.errors %} {{ error }} {% endfor%}
 
           <br>
           {{form.rate.label(class="form-label")}}:
           <div class="container">
             <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
               {% for subfield in form.rate %}
-              {% if subfield.data == rate.rate %}
+              {% if subfield.data == 1 %}
               {{ subfield(checked=True) }}
               {{ subfield.label }}
               {% else %}
@@ -47,11 +51,12 @@
               {% endfor %}
             </div>
           </div>
+          {% for error in form.rate.errors %} {{ error }} {% endfor%}
           <br> <br>
           {{form.submit(class="btn btn-primary w-100")}}
         </form>
         {{ ckeditor.load() }}
-        {{ ckeditor.config(name = 'content', value=rate.content, showWordCount = True) }}
+        {{ ckeditor.config(name = 'content', showWordCount = True) }}
       </div>
     </div>
   </div>

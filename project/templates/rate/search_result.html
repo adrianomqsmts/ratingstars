@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Dashboard{% endblock title %}
+{% block title %}Search{% endblock title %}
 
 {% block content %}
 
@@ -10,50 +10,35 @@
   <strong>{{message}}</strong>
 </div>
 {% endfor %}
-<div class="card border-primary text-dark">
+
+<div class="card text-center text-dark">
   <div class="card-body">
-    <div class='container'>
-      <div class='row'>
-        <div class='col-2'>
-          <div id="wrapper">
-            <img class="img-fluid profile-pic rounded-circle border-dark" src="{{ url_for('static', filename='images/' + (current_user.profile_pic if current_user.profile_pic else 'profile.png')) }}" alt="Profile Pic">
-            <a href="{{ url_for('userbp.pic_update') }}" class="a-text">
-              <div class="text text-center center h-100 w-100">Update Image</div>
-            </a>
-          </div>
-          </a>
-        </div>
-        <div class='col-8'>
-          <p class="card-title display-5  text-center">{{current_user.name}}
-          <p>
-          <p class="lead">{{ current_user.about | safe}}</p>
-        </div>
-        <div class='col-2 text-right'>
-          <a href="{{ url_for('userbp.update') }}" class="btn btn-primary w-100"><i class="fas fa-edit"></i></a>
-        </div>
-      </div>
-    </div>
+    <h4 class="card-title">Search results for {{search}}</h4>
   </div>
-  <hr><br>
-  <div class="center">
-    <a class="btn w-100 text-center  btn-outline-primary" href="{{ url_for('ratebp.create') }}" role="button">New Rate</a>
-  </div>
-  <br>
-  <br>
 </div>
 
 <hr>
 
-{% for rate in rates %}
+{% for rate in rating %}
 <div class="card text-start text-dark mb-2">
   <div class="card-body">
     <div class="row w-100">
       <div class="col-10">
-        <h4 class="card-title"><a href="{{ url_for('ratebp.read', id=rate.id) }}">{{rate.title}}</a></h4>
+        <h4 class="card-title">
+          {% if current_user.id == rate.rater_id %}
+          <a href="{{ url_for('ratebp.read', id=rate.id) }}">{{rate.title}}</a>
+          {% else %}
+          {{rate.title}}
+          {% endif %}
+        </h4>
       </div>
       <div class="col-2 d-flex">
+        {% if current_user.id == rate.rater_id %}
         <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="w-50 btn btn-primary"><i class="fas fa-edit"></i></a>
         <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="w-50 btn btn-danger"><i class="far fa-trash-alt"></i></a>
+
+        {% endif %}
+
       </div>
     </div>
     <p class="card-text">
@@ -62,7 +47,7 @@
       {% endfor %}
       {% for i in range(5-rate.rate) %}
       <span class="fa fa-star"></span>
-      {% endfor %} | {{ rate.rate_type.value }} | {{rate.date_posted.strftime('%Y-%m-%d')}}
+      {% endfor %} | {{ rate.rate_type.value }} | rated by: {{rate.rater.username}} | at {{rate.date_posted.strftime('%Y-%m-%d')}}
     </p>
     <hr>
     <div class="row">

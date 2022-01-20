@@ -17,7 +17,7 @@
       <div class="card-body text-dark">
         <h4 class="card-title text-center">Rate</h4>
         <hr>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
           {{form.hidden_tag()}}
           {{form.title.label(class="form-label")}}:
           {{form.title(class="form-control")}}
@@ -25,10 +25,16 @@
           {{form.original_title.label(class="form-label")}}:
           {{form.original_title(class="form-control")}}
 
+          {{form.rate_type.label(class="form-label")}}:
+          {{form.rate_type(class="form-control")}}
+
+          {{form.rate_pic.label(class="form-label")}}:
+          {{form.rate_pic(class="form-control")}}
+
           {{form.content.label(class="form-label")}}:
           {{form.content(class="form-control")}}
           <br>
-          {{form.rate.label(class="form-label")}}: 
+          {{form.rate.label(class="form-label")}}:
           <div class="container">
             <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
               {% for subfield in form.rate %}

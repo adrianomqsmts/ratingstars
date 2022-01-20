@@ -11,9 +11,13 @@ from flask_migrate import Migrate
 # VIEWS
 from views.view_user import userbp
 from views.view_rate import ratebp
+from views.view_season import seasonbp
 
 # MODELS
 from models.model_user import UsersModel
+
+#FORMS
+from forms.form_rate import SearchForm
 
 # Configs
 app = Flask(__name__)
@@ -37,6 +41,15 @@ def load_user(user_id):
 # BluePrints
 app.register_blueprint(userbp, url_prefix="/user")
 app.register_blueprint(ratebp)
+app.register_blueprint(seasonbp, url_prefix="/season")
+
+
+# Pass Stuff TO navbar
+@app.context_processor
+def base():
+  form = SearchForm()
+  return dict(form=form)
+
 
 
 @app.route("/")

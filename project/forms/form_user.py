@@ -25,14 +25,15 @@ class UpdateForm(FlaskForm):
     username = StringField(
         "Username", validators=[DataRequired(), Length(min=4, max=25)]
     )
-    about = CKEditorField("Content", validators=[DataRequired()])
-    #profile_pic = FileField("Profile Pic")
+    about = CKEditorField("About you", validators=[DataRequired()])
+    # profile_pic = FileField("Profile Pic")
     submit = SubmitField("Update")
 
 
 class UpdatePicForm(FlaskForm):
     profile_pic = FileField("Profile Pic")
     submit = SubmitField("Update")
+
 
 class UserForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired(), Length(min=3, max=25)])
@@ -46,6 +47,7 @@ class UserForm(FlaskForm):
             EqualTo("password2", message="Passwords need to be equal"),
         ],
     )
+    about = CKEditorField("About you", validators=[DataRequired()])
     password2 = PasswordField("Confirm Password", validators=[DataRequired()])
     profile_pic = FileField("Profile Pic")
     email = EmailField("Email", validators=[DataRequired()])
