@@ -27,6 +27,4 @@ class UsersModel(db.Model, UserMixin):
         return check_password_hash(self.password_hash, pw)
 
     def __repr__(self):
-        return f"<Name: {self.name}>"
-
-from models.model_rate import RatingModel
+        return f"<Name: {self.username}>"

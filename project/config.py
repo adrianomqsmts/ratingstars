@@ -6,6 +6,8 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///bd.sqlite3'  # Turn off the Flask-SQLAlchem
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-CKEDITOR_PKG_TYPE = 'basic'
+CKEDITOR_PKG_TYPE = 'basic' # CKEditor theme
 
 UPLOAD_FOLDER = 'static/images'
+
+FLASK_ADMIN_SWATCH = 'cerulean' # Flask-admin theme
