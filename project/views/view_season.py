@@ -4,7 +4,6 @@ from forms.form_season import SeasonForm
 from models.model_season import SeasonModel
 from models.model_rate import RatingModel
 from upload import image_remove_and_upload, image_upload
-
 from database import db
 
 seasonbp = Blueprint(
