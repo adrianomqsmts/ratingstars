@@ -24,7 +24,7 @@ from forms.form_rate import SearchForm
 # ADMIN
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from admin import UsersModelView, RateModelView, SeasonModelView
+from admin import *
 
 # Configs
 app = Flask(__name__)
@@ -37,11 +37,11 @@ migrate = Migrate(app, db)
 ckeditor = CKEditor()
 
 #ADMIN
-admin = Admin(app, name="starts", template_mode="bootstrap3")
+admin = Admin(app, name="Admin", template_mode="bootstrap4", index_view=AdminModelView())
 # ADMIN MODELS
-admin.add_view(UsersModelView(UsersModel, db.session))
-admin.add_view(RateModelView(RatingModel, db.session))
-admin.add_view(SeasonModelView(SeasonModel, db.session))
+admin.add_view(UsersModelView(UsersModel, db.session, name='Users', menu_icon_type='fa', menu_icon_value='fa-list'))
+admin.add_view(RateModelView(RatingModel, db.session, name='Rating', menu_icon_type='fa', menu_icon_value='fa-list'))
+admin.add_view(SeasonModelView(SeasonModel, db.session, name='Season', menu_icon_type='fa', menu_icon_value='fa-list'))
 
 
 # Login

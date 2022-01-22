@@ -10,4 +10,4 @@ CKEDITOR_PKG_TYPE = 'basic' # CKEditor theme
 
 UPLOAD_FOLDER = 'static/images'
 
-FLASK_ADMIN_SWATCH = 'cerulean' # Flask-admin theme
+FLASK_ADMIN_SWATCH = 'cosmo' # Flask-admin theme
