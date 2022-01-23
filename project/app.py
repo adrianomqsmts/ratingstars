@@ -36,12 +36,38 @@ db.app = app
 migrate = Migrate(app, db)
 ckeditor = CKEditor()
 
-#ADMIN
-admin = Admin(app, name="Admin", template_mode="bootstrap4", index_view=AdminModelView())
+# ADMIN
+admin = Admin(
+    app, name="Admin", template_mode="bootstrap4", index_view=AdminModelView()
+)
 # ADMIN MODELS
-admin.add_view(UsersModelView(UsersModel, db.session, name='Users', menu_icon_type='fa', menu_icon_value='fa-list'))
-admin.add_view(RateModelView(RatingModel, db.session, name='Rating', menu_icon_type='fa', menu_icon_value='fa-list'))
-admin.add_view(SeasonModelView(SeasonModel, db.session, name='Season', menu_icon_type='fa', menu_icon_value='fa-list'))
+admin.add_view(
+    UsersModelView(
+        UsersModel,
+        db.session,
+        name="Users",
+        menu_icon_type="fa",
+        menu_icon_value="fa-list",
+    )
+)
+admin.add_view(
+    RateModelView(
+        RatingModel,
+        db.session,
+        name="Rating",
+        menu_icon_type="fa",
+        menu_icon_value="fa-list",
+    )
+)
+admin.add_view(
+    SeasonModelView(
+        SeasonModel,
+        db.session,
+        name="Season",
+        menu_icon_type="fa",
+        menu_icon_value="fa-list",
+    )
+)
 
 
 # Login
@@ -64,12 +90,14 @@ app.register_blueprint(seasonbp, url_prefix="/season")
 # Pass Stuff TO navbar
 @app.context_processor
 def base():
-    form = SearchForm()
-    return dict(form=form)
+    search = SearchForm()
+    return dict(search=search)
 
 
 @app.route("/")
 def index():
+    if current_user.is_authenticated:
+        return redirect(url_for(ratebp.dashboard))
     return render_template("index.html")
 
 

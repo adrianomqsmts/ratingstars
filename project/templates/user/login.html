@@ -21,9 +21,15 @@
         <form action="" method="POST">
           {{form.hidden_tag()}}
           {{form.username.label(class="form-label")}}:
+          <span class="form-text text-danger">
+            {{form.username.errors[0]}}
+          </span>
           {{form.username(class="form-text form-control")}}
           <br>
           {{form.password.label(class="form-label")}}
+          <span class="form-text text-danger">
+            {{form.password.errors[0]}}
+          </span>
           {{form.password(class="form-password form-control")}}
           <br>
           {{form.remember(class="form-check-input", value='n')}} {{form.remember.label(class="form-check-label")}}

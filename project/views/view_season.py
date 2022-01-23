@@ -12,7 +12,7 @@ seasonbp = Blueprint(
 )
 
 
-@seasonbp.route("/create/<int:id>", methods=["GET","POST"])
+@seasonbp.route("/create/<int:id>", methods=["GET", "POST"])
 @login_required
 def create(id):
     form = SeasonForm()
@@ -26,23 +26,26 @@ def create(id):
                 season_pic=season_pic,
                 content=form.content.data,
                 rate=form.rate.data,
-                rate_id = rate.id
+                rate_id=rate.id,
             )
             try:
                 db.session.add(new_season)
                 db.session.commit()
             except:
-                flash('Erro with database', category='danger')
-                return redirect(url_for('sessionbp.create'))
-            flash('Season Rating Created Successfully', category='success')
-            return redirect(url_for('ratebp.read', id=id))
+                flash("Erro with database", category="danger")
+                return redirect(url_for("sessionbp.create"))
+            flash("Season Rating Created Successfully", category="success")
+            return redirect(url_for("ratebp.read", id=id))
         return render_template("season/create_season.html", form=form)
     else:
-        flash('You Cannot Create a new Rate Season on that Rate. database', category='warning')
-        return redirect(url_for('ratebp.dashboard'))
+        flash(
+            "You Cannot Create a new Rate Season on that Rate. database",
+            category="warning",
+        )
+        return redirect(url_for("ratebp.dashboard"))
 
 
-@seasonbp.route("/update/<int:id>", methods=['GET', 'POST'])
+@seasonbp.route("/update/<int:id>", methods=["GET", "POST"])
 @login_required
 def update(id):
     season = SeasonModel.query.get_or_404(id)
@@ -51,15 +54,15 @@ def update(id):
         title=season.title,
         season=season.season,
         content=season.content,
-        )
+    )
     if current_user.id == season.seasons.rater_id:
         if form.validate_on_submit():
-            
-            season.rate=form.rate.data
-            season.title=form.title.data
-            season.season=form.season.data
-            season.content=form.content.data
-            
+
+            season.rate = form.rate.data
+            season.title = form.title.data
+            season.season = form.season.data
+            season.content = form.content.data
+
             try:
                 db.session.add(season)
                 db.session.commit()
@@ -67,13 +70,12 @@ def update(id):
                 flash("Error with database", category="danger")
                 return redirect(url_for("seasonbp.update", id=id))
             flash("Rate Updated successfully!", category="success")
-            return redirect(url_for("ratebp.read",  id=season.rate_id))
+            return redirect(url_for("ratebp.read", id=season.rate_id))
         form.rate.default = season.rate
         return render_template("season/update_season.html", form=form, season=season)
     else:
         flash("You bot allowed to edit that rate!", category="warning")
         return redirect(url_for("ratebp.dashboard"))
-
 
 
 @seasonbp.route("/delete/<int:id>")
@@ -88,7 +90,7 @@ def delete(id):
         except:
             flash("Error to deleting the season...")
         finally:
-            return redirect(url_for("ratebp.read", id = season.rate_id))
+            return redirect(url_for("ratebp.read", id=season.rate_id))
     else:
         flash("You cannot delete this post")
-        return redirect(url_for("ratebp.read", id = season.rate_id))
+        return redirect(url_for("ratebp.read", id=season.rate_id))

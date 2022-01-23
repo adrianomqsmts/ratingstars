@@ -27,6 +27,9 @@
             <ul class="navbar-nav me-auto mt-2 mt-lg-0">
               {% if current_user.is_authenticated %}
               <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('ratebp.dashboard') }}">Dashboard</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('userbp.logout') }}">Logout</a>
               </li>
               {% else %}
@@ -40,10 +43,10 @@
             </ul>
             {% if current_user.is_authenticated %}
             <form class="d-flex my-2 my-lg-0" action="{{url_for('ratebp.search')}}" method="POST">
-              {{form.hidden_tag()}}
-              {{form.search(class="form-control me-sm-2", placeholder="Search")}}
+              {{search.hidden_tag()}}
+              {{search.search(class="form-control me-sm-2", placeholder="Search")}}
 
-              {{form.submit(class="btn btn-outline-success my-2 my-sm-0")}}
+              {{search.submit(class="btn btn-outline-success my-2 my-sm-0")}}
             </form>
             {% endif %}
           </div>

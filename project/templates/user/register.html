@@ -17,19 +17,47 @@
         <hr>
         <form action="" method="POST" enctype="multipart/form-data">
           {{form.hidden_tag()}}
-          {{form.name.label(class="form-label")}}:
+          {{form.name.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.name.errors[0]}}
+          </span>
           {{form.name(class="form-control")}}
-          {{form.username.label(class="form-label")}}
+
+
+          {{form.username.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.username.errors[0]}}
+          </span>
           {{form.username(class="form-control")}}
-          {{form.email.label(class="form-label")}}
+
+          {{form.email.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.email.errors[0]}}
+          </span>
           {{form.email(class=" form-control")}}
-          {{form.profile_pic.label(class="form-label")}}
+
+          {{form.profile_pic.label(class="form-label")}}:
+          <span class="form-text text-danger">
+            {{form.profile_pic.errors[0]}}
+          </span>
           {{form.profile_pic(class="form-control")}}
-          {{form.about.label(class="form-label")}}
+
+          {{form.about.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.about.errors[0]}}
+          </span>
           {{form.about(class=" form-control")}}
-          {{form.password.label(class="form-label")}}
+
+          {{form.password.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.password.errors[0]}}
+          </span>
           {{form.password(class="form-control")}}
-          {{form.password2.label(class="form-label")}}
+
+          {{form.password2.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.password2.errors[0]}}
+          </span>
           {{form.password2(class="form-control")}}
           <br>
           {{form.submit(class="btn btn-primary w-100")}}

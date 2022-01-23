@@ -9,20 +9,18 @@ from models.model_season import SeasonModel
 
 
 class AdminModelView(AdminIndexView):
-  
     def is_visible(self):
-      # This view won't appear in the menu structure
-      return False
-    
-    @expose('/')
+        # This view won't appear in the menu structure
+        return False
+
+    @expose("/")
     def index(self):
         context = {
-          'n_user':UsersModel.query.count(),
-          'n_rate':RatingModel.query.count(),
-          'n_season':SeasonModel.query.count()
+            "n_user": UsersModel.query.count(),
+            "n_rate": RatingModel.query.count(),
+            "n_season": SeasonModel.query.count(),
         }
-        return self.render('admin/index.html', context=context)
-
+        return self.render("admin/index.html", context=context)
 
 
 class UsersModelView(ModelView):
