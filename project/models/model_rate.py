@@ -22,4 +22,4 @@ class RatingModel(db.Model):
     # Foreign Key
     rater_id = db.Column(db.Integer, db.ForeignKey("users_model.id"))
     # User can have many Rates {post.rater.email}
-    seasons = db.relationship("SeasonModel", backref="seasons")
+    seasons = db.relationship("SeasonModel",cascade="all,delete", backref="seasons")

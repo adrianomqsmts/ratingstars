@@ -13,7 +13,7 @@ class UsersModel(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
     profile_pic = db.Column(db.String(), nullable=True)
     # User can have many Rates {post.rater.email}
-    rates = db.relationship("RatingModel", backref="rater")
+    rates = db.relationship("RatingModel", cascade="all,delete", backref="rater")
 
     @property
     def password(self):
