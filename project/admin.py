@@ -1,7 +1,7 @@
 from flask_admin.contrib.sqla import ModelView
 from flask_admin.base import AdminIndexView
 from flask_admin import expose
-from flask_login import current_user
+from flask_login import current_user, login_required
 from flask import redirect, url_for, request
 from models.model_user import UsersModel
 from models.model_rate import RatingModel
@@ -14,6 +14,7 @@ class AdminModelView(AdminIndexView):
         return False
 
     @expose("/")
+    @login_required
     def index(self):
         context = {
             "n_user": UsersModel.query.count(),
