@@ -18,7 +18,7 @@ def dashboard():
     rates = RatingModel.query.filter_by(rater_id=current_user.id)
     total_rate = rates.count()
     page = request.args.get("page", 1, type=int)
-    rates_page = rates.paginate(page=page, per_page=1)
+    rates_page = rates.paginate(page=page, per_page=10)
     return render_template("rate/dashboard.html", rates_page=rates_page)
 
 
