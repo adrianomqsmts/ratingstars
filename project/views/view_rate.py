@@ -128,5 +128,8 @@ def search():
         rating = rating.filter(or_(title_query, title_original_query, type_rate_query))
         rating = rating.order_by(RatingModel.date_posted).all()
         return render_template(
-            "rate/search_result.html", form=form, search=search, rating=rating
+            "rate/search_result.html", search=search, rating=rating
         )
+    else:
+        flash('Error :(', category='danger')
+        return redirect(url_for('ratebp.dashboard'))

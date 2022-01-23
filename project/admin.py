@@ -13,15 +13,11 @@ from functools import wraps
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        
         if not current_user.admin:
             flash("You do not have permission to view that page", "warning")
-            
-
-        return redirect(url_for('index'))
-
+            return redirect(url_for("index"))
+        return f(*args, **kwargs)
     return decorated_function
-
 
 
 class AdminModelView(AdminIndexView):
@@ -37,7 +33,6 @@ class AdminModelView(AdminIndexView):
             "n_user": UsersModel.query.count(),
             "n_rate": RatingModel.query.count(),
             "n_season": SeasonModel.query.count(),
-            "admin": current_user.admin
         }
         return self.render("admin/index.html", context=context)
 
@@ -56,8 +51,9 @@ class UsersModelView(ModelView):
         password_hash="Password",
         about="About",
     )
-    column_editable_list = ("name", "username", "email")
-    form_columns = ("name", "username", "email", "password_hash", "about")
+    column_editable_list = ("name", "username", "email", "admin")
+    form_columns = ("name", "username", "email", "password_hash", "admin")
+    form_edit_rules = ('name', 'username', 'email', "admin")
 
     def is_accessible(self):
         return current_user.is_authenticated

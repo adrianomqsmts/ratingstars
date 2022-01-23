@@ -90,8 +90,8 @@ app.register_blueprint(seasonbp, url_prefix="/season")
 # Pass Stuff TO navbar
 @app.context_processor
 def base():
-    search = SearchForm()
-    return dict(search=search)
+    form = SearchForm()
+    return dict(form=form)
 
 
 @app.route("/")

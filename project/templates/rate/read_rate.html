@@ -36,7 +36,6 @@
     <div class="row">
       <div class="col-2">
         <img class="img-fluid profile-pic border-dark" src="{{ url_for('static', filename='images/' + (rate.rate_pic if rate.rate_pic else 'star.png')) }}" alt="Rate Pic">
-
       </div>
       <div class="col-10">
         <p class="card-text">{{rate.content|safe}}</p>
@@ -57,7 +56,7 @@
   <div class="card-body">
     <div class="row w-100">
       <div class="col-10">
-        <h4 class="card-title">{{season.title}}</h4>
+        <h4 class="card-title">{{season.title}} {{season.season}}</h4>
       </div>
       <div class="col-2 d-flex">
         <a href="{{ url_for('seasonbp.update', id=season.id) }}" class="w-50 btn btn-primary"><i class="fas fa-edit"></i></a>
@@ -74,9 +73,13 @@
     </p>
     <hr>
     <div class="row">
+      <div class="col-2">
+        <img class="img-fluid profile-pic border-dark " src="{{ url_for('static', filename='images/' + (season.season_pic if season.season_pic else 'star.png')) }}" alt="season Pic">
+      </div>
 
-      <p class="card-text">{{season.content|safe}}</p>
-
+      <div class="col-10">
+        <p class="card-text">{{season.content|safe}}</p>
+      </div>
     </div>
   </div>
 </div>
