@@ -91,7 +91,7 @@
       <a class="page-link" href="{{ url_for('ratebp.dashboard', page=(page+1)) }}">{{page+1}}</a>
       </li>
     {% endfor %}
-    <li class="page-item {% if rates_page.page == rates_page.pages %}disabled{% endif %}">
+    <li class="page-item {% if rates_page.page == rates_page.pages or rates_page.pages==0 %}disabled{% endif %}">
       <a class="page-link" href="{{ url_for('ratebp.dashboard', page=rates_page.next_num) }}" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
         <span class="visually-hidden">Next</span>

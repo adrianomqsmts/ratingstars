@@ -6,6 +6,22 @@ from flask import redirect, url_for, request
 from models.model_user import UsersModel
 from models.model_rate import RatingModel
 from models.model_season import SeasonModel
+from flask import redirect, url_for, flash
+from functools import wraps
+
+
+def admin_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        
+        if not current_user.admin:
+            flash("You do not have permission to view that page", "warning")
+            
+
+        return redirect(url_for('index'))
+
+    return decorated_function
+
 
 
 class AdminModelView(AdminIndexView):
@@ -15,11 +31,13 @@ class AdminModelView(AdminIndexView):
 
     @expose("/")
     @login_required
+    @admin_required
     def index(self):
         context = {
             "n_user": UsersModel.query.count(),
             "n_rate": RatingModel.query.count(),
             "n_season": SeasonModel.query.count(),
+            "admin": current_user.admin
         }
         return self.render("admin/index.html", context=context)
 
@@ -30,7 +48,7 @@ class UsersModelView(ModelView):
     page_size = 50
     can_edit = True
     column_searchable_list = ("name", "username", "email")
-    column_list = ("name", "username", "about", "content", "password_hash")
+    column_list = ("name", "username", "admin")
     column_labels = dict(
         name="Name",
         email="Email",
