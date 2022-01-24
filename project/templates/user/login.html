@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show" role="alert">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <strong>{{message}}</strong>
+</div>
+{% endfor %}
+
+<div class="div-center">
+  <div class="login-form">
+    <div class="card text-start">
+      <div class="card-body">
+        <h4 class="card-title text-center">Login</h4>
+        <hr>
+        <form action="" method="POST">
+          {{form.hidden_tag()}}
+          {{form.username.label(class="form-label")}}:
+          <span class="form-text text-danger">
+            {{form.username.errors[0]}}
+          </span>
+          {{form.username(class="form-text form-control")}}
+          <br>
+          {{form.password.label(class="form-label")}}
+          <span class="form-text text-danger">
+            {{form.password.errors[0]}}
+          </span>
+          {{form.password(class="form-password form-control")}}
+          <br>
+          {{form.remember(class="form-check-input", value='n')}} {{form.remember.label(class="form-check-label")}}
+          <br> <br> <br>
+          {{form.submit(class="btn btn-primary w-100")}}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock content %}

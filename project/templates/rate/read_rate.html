@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show" role="alert">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <strong>{{message}}</strong>
+</div>
+{% endfor %}
+
+<div class="card text-start text-dark mb-2">
+  <div class="card-body">
+    <div class="row w-100">
+      <div class="col-10">
+        <h4 class="card-title"><a href="{{ url_for('ratebp.read', id=rate.id) }}">{{rate.title}}</a></h4>
+      </div>
+      {% if current_user.id == rate.rater_id %}
+      <div class="col-2 d-flex">
+        <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="w-50 btn btn-primary"><i class="fas fa-edit"></i></a>
+        <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="w-50 btn btn-danger"><i class="far fa-trash-alt"></i></a>
+      </div>
+      {% endif %}
+    </div>
+    <p class="card-text">
+      {% for i in range(rate.rate) %}
+      <span class="fa fa-star checked"></span>
+      {% endfor %}
+      {% for i in range(5-rate.rate) %}
+      <span class="fa fa-star"></span>
+      {% endfor %} | {{ rate.rate_type.value }} | {{rate.date_posted.strftime('%Y-%m-%d')}}
+    </p>
+    <hr>
+    <div class="row">
+      <div class="col-2">
+        <img class="img-fluid profile-pic border-dark" src="{{ url_for('static', filename='images/' + (rate.rate_pic if rate.rate_pic else 'star.png')) }}" alt="Rate Pic">
+      </div>
+      <div class="col-10">
+        <p class="card-text">{{rate.content|safe}}</p>
+      </div>
+    </div>
+    <div class="center">
+      <a class="btn w-100 text-center  btn-outline-primary" href="{{ url_for('seasonbp.create', id=rate.id) }}" role="button">New Season Rate</a>
+    </div>
+  </div>
+</div>
+
+
+
+<hr>
+
+{% for season in rate.seasons %}
+<div class="card text-start text-dark mb-2">
+  <div class="card-body">
+    <div class="row w-100">
+      <div class="col-10">
+        <h4 class="card-title">{{season.title}} {{season.season}}</h4>
+      </div>
+      <div class="col-2 d-flex">
+        <a href="{{ url_for('seasonbp.update', id=season.id) }}" class="w-50 btn btn-primary"><i class="fas fa-edit"></i></a>
+        <a href="{{ url_for('seasonbp.delete', id=season.id) }}" class="w-50 btn btn-danger"><i class="far fa-trash-alt"></i></a>
+      </div>
+    </div>
+    <p class="card-text">
+      {% for i in range(season.rate) %}
+      <span class="fa fa-star checked"></span>
+      {% endfor %}
+      {% for i in range(5-season.rate) %}
+      <span class="fa fa-star"></span>
+      {% endfor %} | {{season.date_posted.strftime('%Y-%m-%d')}}
+    </p>
+    <hr>
+    <div class="row">
+      <div class="col-2">
+        <img class="img-fluid profile-pic border-dark " src="{{ url_for('static', filename='images/' + (season.season_pic if season.season_pic else 'star.png')) }}" alt="season Pic">
+      </div>
+
+      <div class="col-10">
+        <p class="card-text">{{season.content|safe}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}

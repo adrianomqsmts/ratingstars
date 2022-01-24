@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock title %}
+
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show" role="alert">
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  <strong>{{message}}</strong>
+</div>
+{% endfor %}
+
+<div class="div-center2">
+  <div class="login-form">
+    <div class="card text-start">
+      <div class="card-body text-dark">
+        <h4 class="card-title text-center">Rate</h4>
+        <hr>
+        <form action="" method="POST">
+          {{form.hidden_tag()}}
+          {{form.title.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.title.errors[0]}}
+          </span>
+          {{form.title(class="form-control")}}
+
+          {{form.original_title.label(class="form-label")}}:
+          <span class="form-text text-danger">
+            {{form.original_title.errors[0]}}
+          </span>
+          {{form.original_title(class="form-control")}}
+
+          {{form.rate_type.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.rate_type.errors[0]}}
+          </span>
+          {{form.rate_type(class="form-control")}}
+
+          {{form.content.label(class="form-label")}}*:
+          <span class="form-text text-danger">
+            {{form.content.errors[0]}}
+          </span>
+          {{form.content(class="form-control")}}
+
+
+          <br>
+          {{form.rate.label(class="form-label")}}:
+          <span class="form-text text-danger">
+            {{form.rate.errors[0]}}
+          </span>
+          <div class="container">
+            <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
+              {% for subfield in form.rate %}
+              {% if subfield.data == rate.rate %}
+              {{ subfield(checked=True) }}
+              {{ subfield.label }}
+              {% else %}
+              {{ subfield }}
+              {{ subfield.label }}
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <br> <br>
+          {{form.submit(class="btn btn-primary w-100")}}
+        </form>
+        {{ ckeditor.load() }}
+        {{ ckeditor.config(name = 'content', value=rate.content, showWordCount = True) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
