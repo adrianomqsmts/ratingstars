@@ -40,6 +40,7 @@ ckeditor = CKEditor()
 admin = Admin(
     app, name="Admin", template_mode="bootstrap4", index_view=AdminModelView()
 )
+
 # ADMIN MODELS
 admin.add_view(
     UsersModelView(
@@ -90,14 +91,14 @@ app.register_blueprint(seasonbp, url_prefix="/season")
 # Pass Stuff TO navbar
 @app.context_processor
 def base():
-    form = SearchForm()
-    return dict(form=form)
+    search_form = SearchForm()
+    return dict(search_form=search_form)
 
 
 @app.route("/")
 def index():
     if current_user.is_authenticated:
-        return redirect(url_for('ratebp.dashboard'))
+        return redirect(url_for("ratebp.dashboard"))
     return render_template("index.html")
 
 

@@ -17,7 +17,7 @@ from models.model_rate import TypeRate
 
 class SearchForm(FlaskForm):
   search = StringField('Search', validators=[DataRequired()])
-  submit = SubmitField('Submit')
+  submit = SubmitField('Search')
 
 
 class RateForm(FlaskForm):
