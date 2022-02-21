@@ -64,6 +64,7 @@
           <br>
           {{form.submit(class="btn btn-primary w-100")}}
         </form>
+        {{ ckeditor.load() }}
         {{ ckeditor.config(name = 'content', showWordCount = True) }}
       </div>
     </div>

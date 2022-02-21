@@ -35,6 +35,9 @@ db.init_app(app)
 db.app = app
 migrate = Migrate(app, db)
 ckeditor = CKEditor()
+ckeditor.init_app(app)
+
+db.create_all(app=app)
 
 # ADMIN
 admin = Admin(
@@ -113,8 +116,4 @@ def error_on_server(e):
 
 
 if __name__ == "__main__":
-    ckeditor.init_app(app)
-
-    db.create_all(app=app)
-
     app.run(host="127.0.0.1", port=8000, debug=True)
