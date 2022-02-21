@@ -3,9 +3,9 @@ from flask_admin.base import AdminIndexView
 from flask_admin import expose
 from flask_login import current_user, login_required
 from flask import redirect, url_for, request
-from models.model_user import UsersModel
-from models.model_rate import RatingModel
-from models.model_season import SeasonModel
+from project.models.model_user import UsersModel
+from project.models.model_rate import RatingModel
+from project.models.model_season import SeasonModel
 from flask import redirect, url_for, flash
 from functools import wraps
 

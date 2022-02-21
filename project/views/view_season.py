@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import login_required, current_user
-from ..forms.form_season import SeasonForm
-from ..models.model_season import SeasonModel
-from ..models.model_rate import RatingModel
-from ..upload import image_remove_and_upload, image_upload
-from ..database import db
+from project.forms.form_season import SeasonForm
+from project.models.model_season import SeasonModel
+from project.models.model_rate import RatingModel
+from project.upload import image_remove_and_upload, image_upload
+from project.database import db
 
 seasonbp = Blueprint(
     "seasonbp",

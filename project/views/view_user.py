@@ -6,13 +6,13 @@ from flask_login import (
     logout_user,
     current_user,
 )
-from ..database import db
-from ..models.model_user import UsersModel
-from ..forms.form_user import UserForm, LoginForm, UpdateForm, UpdatePicForm
+from project.database import db
+from project.models.model_user import UsersModel
+from project.forms.form_user import UserForm, LoginForm, UpdateForm, UpdatePicForm
 from werkzeug.utils import secure_filename
 import uuid as uuid
 import os
-from ..upload import image_upload, image_remove_and_upload
+from project.upload import image_upload, image_remove_and_upload
 
 
 userbp = Blueprint(

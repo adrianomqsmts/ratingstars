@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, flash, redirect, url_for, request
 from flask_login import login_required, current_user
-from ..forms.form_rate import RateForm, SearchForm
-from ..models.model_rate import RatingModel, TypeRate
-from ..upload import image_upload, image_remove_and_upload
-from ..database import db
+from project.forms.form_rate import RateForm, SearchForm
+from project.models.model_rate import RatingModel, TypeRate
+from project.upload import image_upload, image_remove_and_upload
+from project.database import db
 from sqlalchemy import or_
 
 ratebp = Blueprint(

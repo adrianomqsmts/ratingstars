@@ -5,26 +5,26 @@ from flask_ckeditor import CKEditor
 from flask_login import LoginManager, current_user
 
 # Database
-from database import db
+from project.database import db
 from flask_migrate import Migrate
 
 # VIEWS
-from views.view_user import userbp
-from views.view_rate import ratebp
-from views.view_season import seasonbp
+from project.views.view_user import userbp
+from project.views.view_rate import ratebp
+from project.views.view_season import seasonbp
 
 # MODELS
-from models.model_user import UsersModel
-from models.model_rate import RatingModel
-from models.model_season import SeasonModel
+from project.models.model_user import UsersModel
+from project.models.model_rate import RatingModel
+from project.models.model_season import SeasonModel
 
 # FORMS
-from forms.form_rate import SearchForm
+from project.forms.form_rate import SearchForm
 
 # ADMIN
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from admin import *
+from project.admin import *
 
 # Configs
 app = Flask(__name__)

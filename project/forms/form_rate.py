@@ -12,7 +12,7 @@ from wtforms import (
 from wtforms.validators import DataRequired, EqualTo, Length
 from wtforms.widgets import TextArea
 from flask_ckeditor import CKEditorField
-from ..models.model_rate import TypeRate
+from project.models.model_rate import TypeRate
 
 
 class SearchForm(FlaskForm):
