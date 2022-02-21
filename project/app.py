@@ -37,7 +37,7 @@ migrate = Migrate(app, db)
 ckeditor = CKEditor()
 ckeditor.init_app(app)
 
-db.create_all(app=app)
+#db.create_all(app=app)
 
 # ADMIN
 admin = Admin(
