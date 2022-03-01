@@ -2,7 +2,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime, date
 from flask_login import UserMixin
 from project.database import db
-rom project.models.model_rate import RatingModel
+from project.models.model_rate import RatingModel
 from project.models.model_season import SeasonModel
 
 
