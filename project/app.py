@@ -33,9 +33,11 @@ app.config.from_object("project.config")
 # Initialize
 db.init_app(app)
 db.app = app
+db.create_all()
 migrate = Migrate(app, db)
 ckeditor = CKEditor()
 ckeditor.init_app(app)
+
 
 #db.create_all(app=app)
 
