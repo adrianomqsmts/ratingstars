@@ -1,6 +1,8 @@
 from project.database import db
 from datetime import datetime, date
 from enum import Enum, auto
+from project.models.model_user import UsersModel
+from project.models.model_season import SeasonModel
 
 
 class TypeRate(Enum):

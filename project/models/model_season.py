@@ -1,5 +1,7 @@
 from project.database import db
 from datetime import datetime, date
+from project.models.model_user import UsersModel
+from project.models.model_rate import RatingModel
 
 
 class SeasonModel(db.Model):
