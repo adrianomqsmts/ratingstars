@@ -31,6 +31,7 @@ from project.admin import *
 app = Flask(__name__)
 app.config.from_object("project.config")
 
+
 # Initialize
 db.init_app(app)
 db.app = app
