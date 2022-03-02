@@ -1,6 +1,6 @@
 import os
 
-SECRET_KEY = os.environ['SECRET_KEY'] # Grabs the folder where the script runs.
+SECRET_KEY = '21312132' # Grabs the folder where the script runs.
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///bd.sqlite3'  # Turn off the Flask-SQLAlchemy event system and warning
 
