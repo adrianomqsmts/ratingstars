@@ -39,10 +39,6 @@ migrate = Migrate(app, db)
 ckeditor = CKEditor()
 ckeditor.init_app(app)
 
-# Create the main driver function
-port = int(os.environ.get("PORT", 5000)) # <-----
-app.run(host='0.0.0.0', port=port)       # <-----
-
 
 #db.create_all(app=app)
 
