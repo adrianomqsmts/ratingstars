@@ -38,6 +38,10 @@ migrate = Migrate(app, db)
 ckeditor = CKEditor()
 ckeditor.init_app(app)
 
+# Create the main driver function
+port = int(os.environ.get("PORT", 5000)) # <-----
+app.run(host='0.0.0.0', port=port)       # <-----
+
 
 #db.create_all(app=app)
 
@@ -116,6 +120,3 @@ def page_not_found(e):
 def error_on_server(e):
     return render_template("error/500.html"), 500
 
-
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000, debug=True)
