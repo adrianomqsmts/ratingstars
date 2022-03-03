@@ -3,10 +3,11 @@
 import os
 import uuid as uuid
 from typing import Optional
+from project.configs.server import server
 
 from werkzeug.utils import secure_filename
 
-PATH = "static/images"
+PATH = "project/static/images/"
 
 
 def image_upload(file: object) -> Optional[str]:

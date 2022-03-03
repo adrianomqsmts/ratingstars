@@ -7,7 +7,6 @@ migrations/
 bd.sqlite3
 # C extensions
 *.so
-
 # Distribution / packaging
 .Python
 build/

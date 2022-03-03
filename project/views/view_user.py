@@ -174,9 +174,9 @@ def pic_update() -> Response:
     form = UpdatePicForm()
     id = current_user.id
     user = UsersModel.query.get_or_404(id)
-    path = "static/images"
     if request.method == "POST":
-        image_remove_and_upload(request.files["profile_pic"], user.profile_pic)
+        new_profile_pic = image_remove_and_upload(request.files["profile_pic"], user.profile_pic)
+        user.profile_pic = new_profile_pic
         try:
             db.session.add(user)
             db.session.commit()
