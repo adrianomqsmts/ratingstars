@@ -1,10 +1,25 @@
-from flask import Blueprint, render_template, flash, redirect, url_for, request
-from flask_login import login_required, current_user
+"""View do da avaliação por temporadas de uma dada avaliação única."""
+
+from typing import Union
+
+from flask import (
+    Blueprint,
+    Response,
+    flash,
+    redirect,
+    render_template,
+    request,
+    url_for,
+)
+from flask_login import current_user, login_required
+
+from project.configs.server import server
 from project.forms.form_season import SeasonForm
-from project.models.model_season import SeasonModel
 from project.models.model_rate import RatingModel
-from project.upload import image_remove_and_upload, image_upload
-from project.database import db
+from project.models.model_season import SeasonModel
+from project.utils.upload import image_remove_and_upload, image_upload
+
+db = server.db
 
 seasonbp = Blueprint(
     "seasonbp",
@@ -14,7 +29,19 @@ seasonbp = Blueprint(
 
 @seasonbp.route("/create/<int:id>", methods=["GET", "POST"])
 @login_required
-def create(id):
+def create(id: int) -> Response:
+    """View de controle e criação de uma avaliação de temporada.
+
+    Decorators:
+        @Login_required
+        methods=["GET", "POST"]
+
+    Args:
+        id (int): Identificador da avaliação que será inserida uma nova temporada
+
+    Returns:
+        Union[Response, str]: Dashboard | Create | 404
+    """
     form = SeasonForm()
     rate = RatingModel.query.get_or_404(id)
     if rate.rater_id == current_user.id:
@@ -47,7 +74,19 @@ def create(id):
 
 @seasonbp.route("/update/<int:id>", methods=["GET", "POST"])
 @login_required
-def update(id):
+def update(id: int) -> Response:
+    """View de controle e criação de uma avaliação de temporada.
+
+    Decorators:
+        @Login_required
+        methods=["GET", "POST"]
+
+    Args:
+        id (int): Identificador da temporada que será atualizada.
+
+    Returns:
+        Union[Response, str]: Dashboard | Update | 404
+    """
     season = SeasonModel.query.get_or_404(id)
     form = SeasonForm(
         rate=season.rate,
@@ -80,7 +119,19 @@ def update(id):
 
 @seasonbp.route("/delete/<int:id>")
 @login_required
-def delete(id):
+def delete(id: int) -> Response:
+    """View de controle e remoção de uma avaliação de temporada.
+
+    Decorators:
+        @Login_required
+        methods=["GET", "POST"]
+
+    Args:
+        id (int): Identificador da temporada que será removida.
+
+    Returns:
+        Response: Dashboard
+    """
     season = SeasonModel.query.get_or_404(id)
     if current_user.id == season.seasons.rater_id:
         try:

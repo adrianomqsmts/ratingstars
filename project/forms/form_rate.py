@@ -1,26 +1,43 @@
+"""Módulo dos formulários relativos as avaliações da aplicação."""
+
+from flask_ckeditor import CKEditorField
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
 from wtforms import (
-    StringField,
-    SubmitField,
-    IntegerRangeField,
-    IntegerField,
-    ValidationError,
     RadioField,
     SelectField,
+    StringField,
+    SubmitField,
 )
-from wtforms.validators import DataRequired, EqualTo, Length
-from wtforms.widgets import TextArea
-from flask_ckeditor import CKEditorField
+from wtforms.validators import DataRequired
 from project.models.model_rate import TypeRate
 
 
 class SearchForm(FlaskForm):
-  search = StringField('Search', validators=[DataRequired()])
-  submit = SubmitField('Search')
+    """Formulário de pesquisa rápida.
+
+    atributos:
+        search* (StringField): Campo de pesquisa
+        submit (SubmitField): Compo de Submissão
+    """
+
+    search = StringField("Search", validators=[DataRequired()])
+    submit = SubmitField("Search")
 
 
 class RateForm(FlaskForm):
+    """Formulário de Avaliação.
+
+    atributos:
+        title* (StringField): O título da avaliação
+        original_title (StringField): O título original da avaliação
+        content* (CKEditorField): Descrição da Avaliação
+        rate_type* (SelectField): O tipo da Avaliação
+        rate_pic (FileField): Uma imagem descritiva para a Avaliação
+        rate* (RadioField): A nota para a Avaliação
+        submit (SubmitField): Compo de Submissão
+    """
+
     title = StringField("Title", validators=[DataRequired()])
     original_title = StringField("Original Title")
     # content = StringField('Content', validators=[DataRequired()], widget=TextArea())
