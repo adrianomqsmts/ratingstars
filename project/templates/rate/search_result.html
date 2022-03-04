@@ -5,7 +5,9 @@
 {% block content %}
 
 {% for category, message in get_flashed_messages(with_categories=True) %}
-<div class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show" role="alert">
+<div
+  class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show"
+  role="alert">
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   <strong>{{message}}</strong>
 </div>
@@ -13,6 +15,7 @@
 
 <div class="card text-center text-dark">
   <div class="card-body">
+    <a name="voltar" class="btn btn-outline-secondary" onclick="history.back(-1)" role="button">Voltar</a>
     <h4 class="card-title">Search results for: <span class="text-muted">{{search}}</span></h4>
   </div>
 </div>
@@ -34,8 +37,10 @@
       </div>
       <div class="col-2 d-flex">
         {% if current_user.id == rate.rater_id %}
-        <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="w-50 btn btn-primary"><i class="fas fa-edit"></i></a>
-        <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="w-50 btn btn-danger"><i class="far fa-trash-alt"></i></a>
+        <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="w-50 btn btn-primary"><i
+            class="fas fa-edit"></i></a>
+        <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="w-50 btn btn-danger"><i
+            class="far fa-trash-alt"></i></a>
 
         {% endif %}
 
@@ -47,12 +52,15 @@
       {% endfor %}
       {% for i in range(5-rate.rate) %}
       <span class="fa fa-star"></span>
-      {% endfor %} | {{ rate.rate_type.value }} | rated by: {{rate.rater.username}} | at {{rate.date_posted.strftime('%Y-%m-%d')}}
+      {% endfor %} | {{ rate.rate_type.value }} | rated by: {{rate.rater.username}} | at
+      {{rate.date_posted.strftime('%Y-%m-%d')}}
     </p>
     <hr>
     <div class="row">
       <div class="col-2">
-        <img class="img-fluid rate-pic border-dark" src="{{ url_for('static', filename='images/' + (rate.rate_pic if rate.rate_pic else 'star.png')) }}" alt="Rate Pic">
+        <img class="img-fluid rate-pic border-dark"
+          src="{{ url_for('static', filename='images/' + (rate.rate_pic if rate.rate_pic else 'star.png')) }}"
+          alt="Rate Pic">
 
       </div>
       <div class="col-10">

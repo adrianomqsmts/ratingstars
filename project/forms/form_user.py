@@ -43,7 +43,7 @@ class UpdateForm(FlaskForm):
     username = StringField(
         "Username*", validators=[DataRequired(), Length(min=5, max=50)]
     )
-    about = CKEditorField("About you*", validators=[DataRequired()])
+    about = CKEditorField("About you*", validators=[DataRequired(), Length(max=500)])
     # profile_pic = FileField("Profile Pic")
     submit = SubmitField("Update")
 

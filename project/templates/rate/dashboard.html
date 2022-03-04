@@ -34,9 +34,9 @@
             {% endif %}
             </pan class='h4'>@{{current_user.username|upper}}</span>
           <p>
-          <p class="lead">
+          <p class="text-justify">
             {% if current_user.about %}
-            {{ current_user.about | safe}}
+            {{ current_user.about|safe}}
             {% else %}
           <p class="lead">About . . . .</p>
           {% endif %}
@@ -60,22 +60,22 @@
 <hr>
 <div class="row">
   {% for rate in rates_page.items %}
-  <div class="col-md-6 pb-4">
-    <div class="card text-dark">
+  <div class="col-md-6 pb-4 d-flex">
+    <div class="card flex-fill text-dark">
       <div class="card-header">
         <div class="d-flex flex-row-reverse">
-         <span>
-          {% for i in range(rate.rate) %}
-          <span class="fa fa-star checked"></span>
-          {% endfor %}
-          {% for i in range(5-rate.rate) %}
-          <span class="fa fa-star"></span>
-          {% endfor %} | {{ rate.rate_type.value }} | {{rate.date_posted.strftime('%Y-%m-%d')}}
-         </span>
+          <span>
+            {% for i in range(rate.rate) %}
+            <span class="fa fa-star checked"></span>
+            {% endfor %}
+            {% for i in range(5-rate.rate) %}
+            <span class="fa fa-star"></span>
+            {% endfor %} | {{ rate.rate_type.value }} | {{rate.date_posted.strftime('%Y-%m-%d')}}
+          </span>
         </div>
       </div>
-      <div class="card-body">
-        <h4 class="card-title text-center">
+      <div class="card-body d-flex flex-column">
+        <div class="card-title h3 text-center">
           <a class="text-decoration-none text-dark" href="{{ url_for('ratebp.read', id=rate.id) }}">
             <img class=" card-img-top img-fluid rate-pic-card"
               src="{{ url_for('static', filename='images/' + (rate.rate_pic if rate.rate_pic else 'star.png')) }}"
@@ -83,29 +83,20 @@
 
             {{rate.title}}
           </a>
-        </h4>
-        <p class="card-text text-justify text-break ">{{rate.content|safe}}</p>
-        <div class="card-text d-flex w-100">
-          <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="w-50 btn btn-primary"><i class="fas fa-edit"></i></a>
-          <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="w-50 btn btn-danger"><i
+        </div>
+        <hr>
+        <div class="card-text h-100">
+          <p class="text-break">{{rate.content|safe}}</p>
+        </div>
+        <div class="card-footer m-auto d-flex flex-row-reverse w-100">
+          <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="btn btn-primary"><i
+              class="fas fa-edit"></i></a>
+          <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="btn btn-danger"><i
               class="far fa-trash-alt"></i></a>
         </div>
       </div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   {% endfor %}
 </div>
