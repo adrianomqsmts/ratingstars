@@ -22,7 +22,7 @@ class __Server:
             __name__, template_folder=template_folder, static_folder=static_folder
         )
         self.db = SQLAlchemy()
-        self.migrate = Migrate(self.app, self.db)
+        self.migrate = Migrate(self.app, self.db, render_as_batch=True)
         self.ckeditor = CKEditor()
         self.login_manager = LoginManager()
 

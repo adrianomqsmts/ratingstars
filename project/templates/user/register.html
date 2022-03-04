@@ -5,12 +5,13 @@
 {% block content %}
 
 {% for category, message in get_flashed_messages(with_categories=True) %}
-<div class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show" role="alert">
+<div
+  class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show"
+  role="alert">
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   <strong>{{message}}</strong>
 </div>
 {% endfor %}
-
 <div class="div-center2">
   <div class="register-form">
     <div class="card text-start">
@@ -19,12 +20,6 @@
         <hr>
         <form action="" method="POST" enctype="multipart/form-data">
           {{form.hidden_tag()}}
-          {{form.name.label(class="form-label")}}*:
-          <span class="form-text text-danger">
-            {{form.name.errors[0]}}
-          </span>
-          {{form.name(class="form-control")}}
-
 
           {{form.username.label(class="form-label")}}*:
           <span class="form-text text-danger">
@@ -37,18 +32,6 @@
             {{form.email.errors[0]}}
           </span>
           {{form.email(class=" form-control")}}
-
-          {{form.profile_pic.label(class="form-label")}}:
-          <span class="form-text text-danger">
-            {{form.profile_pic.errors[0]}}
-          </span>
-          {{form.profile_pic(class="form-control")}}
-
-          {{form.about.label(class="form-label")}}*:
-          <span class="form-text text-danger">
-            {{form.about.errors[0]}}
-          </span>
-          {{form.about(class=" form-control")}}
 
           {{form.password.label(class="form-label")}}*:
           <span class="form-text text-danger">
@@ -64,8 +47,6 @@
           <br>
           {{form.submit(class="btn btn-primary w-100")}}
         </form>
-        {{ ckeditor.load() }}
-        {{ ckeditor.config(name = 'content', showWordCount = True) }}
       </div>
     </div>
   </div>

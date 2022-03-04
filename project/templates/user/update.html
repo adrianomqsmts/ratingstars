@@ -19,11 +19,23 @@
         <hr>
         <form action="" method="POST" enctype="multipart/form-data">
           {{form.hidden_tag()}}
+
           {{form.name.label(class="form-label")}}:
+          <span class="form-text text-danger">
+            {{form.name.errors[0]}}
+          </span>
           {{form.name(class="form-text form-control", value=current_user.name)}}
+
           {{form.username.label(class="form-label")}}:
+          <span class="form-text text-danger">
+            {{form.name.errors[0]}}
+          </span>
           {{form.username(class="form-text form-control", value=current_user.username)}}
-          {{form.about.label(class="form-label")}}
+
+          {{form.about.label(class="form-label")}}:
+          <span class="form-text text-danger">
+            {{form.about.errors[0]}}
+          </span>
           {{form.about(class=" form-control")}}
           <br>
           {{form.submit(class="btn btn-primary w-100")}}

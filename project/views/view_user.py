@@ -93,19 +93,11 @@ def register() -> Response:
     if form.validate_on_submit():  # Verify form fields
         email = UsersModel().query.filter_by(email=form.email.data).first()
         username = UsersModel().query.filter_by(email=form.email.data).first()
-        if (username is None) and (
-            email is None
-        ):  # if not exist that user.email and that user.username
-            # Upload file and get its name
-            profile_pic = image_upload(request.files["profile_pic"])
-
+        if (username is None) and (email is None):
             new_user = UsersModel(
-                name=form.name.data,
                 username=form.username.data,
-                about=form.about.data,
                 email=form.email.data,
                 password=form.password.data,
-                profile_pic=profile_pic,
             )
 
             try:  # Save in Database
@@ -119,11 +111,7 @@ def register() -> Response:
         else:
             flash("Username or email Already Exists", category="info")
         # Clear the form
-        form.name.data = ""
-        form.email.data = ""
-        form.username.data = ""
         form.password.data = ""
-        form.about.data = ""
 
     return render_template("user/register.html", form=form)
 
@@ -144,7 +132,7 @@ def update() -> Response:
     id = current_user.id
     user = UsersModel.query.get_or_404(id)  # get current user if exists
     if form.validate_on_submit():
-        user.name = request.form["name"]
+        user.name = request.form["name"] 
         user.username = request.form["username"]
         user.about = request.form["about"]
         try:
@@ -156,6 +144,8 @@ def update() -> Response:
             flash("Error with database", category="danger")
             return redirect(url_for("userbp.update"))
     else:
+        user.name = user.name if user.name else ''
+        form.about.data = user.about if user.about else ''
         return render_template("user/update.html", form=form, user=user)
 
 
@@ -175,7 +165,9 @@ def pic_update() -> Response:
     id = current_user.id
     user = UsersModel.query.get_or_404(id)
     if request.method == "POST":
-        new_profile_pic = image_remove_and_upload(request.files["profile_pic"], user.profile_pic)
+        new_profile_pic = image_remove_and_upload(
+            request.files["profile_pic"], user.profile_pic
+        )
         user.profile_pic = new_profile_pic
         try:
             db.session.add(user)
