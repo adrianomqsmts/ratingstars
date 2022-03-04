@@ -1,6 +1,7 @@
 """Aplicação centralizadora do FLASK."""
 
 from typing import Any
+import os
 
 from flask import Response, redirect, render_template, url_for
 from flask_login import LoginManager, current_user
@@ -69,5 +70,6 @@ def index() -> Response:
     return render_template("index.html")
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
