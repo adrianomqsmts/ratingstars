@@ -23,7 +23,6 @@ class RatingModel(db.Model):
     atributos:
         id* (Integer): Identificador da avaliação
         title* (String): O título da avaliação
-        original_title (String): O título original da avaliação
         content* (Text): Descrição da Avaliação
         rate_type* (Enum): O tipo da Avaliação
         rate_pic (String): o caminho da imagem da Avaliação
@@ -34,9 +33,9 @@ class RatingModel(db.Model):
     """
 
     id = db.Column(db.Integer, primary_key=True)
-    original_title = db.Column(db.String(255))
+    # original_title = db.Column(db.String(255))
     title = db.Column(db.String(255), nullable=False)
-    content = db.Column(db.Text, nullable=False)
+    content = db.Column(db.Text, nullable=True)
     rate_type = db.Column(db.Enum(TypeRate), default=TypeRate.MOVIE)
     rate = db.Column(db.Integer, nullable=False)
     rate_pic = db.Column(db.String(), nullable=True)

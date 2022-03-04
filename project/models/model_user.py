@@ -18,8 +18,8 @@ class UsersModel(db.Model, UserMixin):
     atributos:
         id* (Integer): Identificador do usuário
         username* (String): o nome de usuário
-        name* (String): o nome do usuário
-        about* (Text): Descrição do usuário
+        name (String): o nome do usuário
+        about (Text): Descrição do usuário
         profile_pic (String): o caminho da imagem do usuário
         email* (String): O email do usuário
         password_hash (String): Senha criptografada do Usuário
@@ -30,7 +30,7 @@ class UsersModel(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), nullable=False, unique=True)
     about = db.Column(db.Text)
-    name = db.Column(db.String(200), nullable=False)
+    name = db.Column(db.String(200), nullable=True)
     email = db.Column(db.String(100), nullable=False, unique=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     password_hash = db.Column(db.String(128))

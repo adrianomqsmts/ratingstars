@@ -33,17 +33,17 @@ class UpdateForm(FlaskForm):
     """Formulário de atualização de usuário.
 
     atributos:
-        name* (StringField): O nome do usuário
-        username* (StringField): O nome de usuário
+        name* (StringField): O nome do usuário, min=3, max=255
+        username* (StringField): O nome de usuário, mim=5, max=50
         about* (CKEditorField): Sobre o Usuário
         submit (SubmitField): Compo de Submissão
     """
 
-    name = StringField("Name", validators=[DataRequired(), Length(min=3, max=25)])
+    name = StringField("Name*", validators=[DataRequired(), Length(min=3, max=255)])
     username = StringField(
-        "Username", validators=[DataRequired(), Length(min=4, max=25)]
+        "Username*", validators=[DataRequired(), Length(min=5, max=50)]
     )
-    about = CKEditorField("About you", validators=[DataRequired()])
+    about = CKEditorField("About you*", validators=[DataRequired(), Length(max=500)])
     # profile_pic = FileField("Profile Pic")
     submit = SubmitField("Update")
 
@@ -64,21 +64,17 @@ class UserForm(FlaskForm):
     """Formulário de criação de usuário.
 
     atributos:
-        name* (StringField): O nome do usuário
-        username* (StringField): O nome de usuário
+        username* (StringField): O nome de usuário, min=5, max=255
         password* (PasswordField): A senha de Usuário
         password2* (PasswordField): A senha de confirmação de Usuário
-        about* (CKEditorField): Sobre o Usuário
-        profile_pic (FileField): O imagem de perfil do usuário
         email* (EmailField): O email do usuário
-        remember (CKEditorField): Se o usuário deve se lembrado ao entrar novamente
         submit (SubmitField): Compo de Submissão
     """
 
-    name = StringField("Name", validators=[DataRequired(), Length(min=3, max=25)])
     username = StringField(
-        "Username", validators=[DataRequired(), Length(min=4, max=25)]
+        "Username", validators=[DataRequired(), Length(min=5, max=120)]
     )
+    email = EmailField("Email", validators=[DataRequired()])
     password = PasswordField(
         "Password",
         validators=[
@@ -86,8 +82,5 @@ class UserForm(FlaskForm):
             EqualTo("password2", message="Passwords need to be equal"),
         ],
     )
-    about = CKEditorField("About you", validators=[DataRequired()])
     password2 = PasswordField("Confirm Password", validators=[DataRequired()])
-    profile_pic = FileField("Profile Pic")
-    email = EmailField("Email", validators=[DataRequired()])
     submit = SubmitField("Register")

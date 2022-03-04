@@ -3,7 +3,7 @@
 from flask_ckeditor import CKEditorField
 from flask_wtf import FlaskForm
 from wtforms import FileField, IntegerField, RadioField, StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 
 
 class SeasonForm(FlaskForm):
@@ -21,7 +21,7 @@ class SeasonForm(FlaskForm):
     season = IntegerField("Season", validators=[DataRequired()])
     title = StringField("Title")
     season_pic = FileField("Season Pic")
-    content = CKEditorField("Content", validators=[DataRequired()])
+    content = CKEditorField("Content", validators=[DataRequired(), Length(max=500)])
     rate = RadioField(
         "Rate",
         validators=[DataRequired()],

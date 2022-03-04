@@ -9,7 +9,7 @@ from wtforms import (
     StringField,
     SubmitField,
 )
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
 from project.models.model_rate import TypeRate
 
 
@@ -38,14 +38,14 @@ class RateForm(FlaskForm):
         submit (SubmitField): Compo de Submissão
     """
 
-    title = StringField("Title", validators=[DataRequired()])
-    original_title = StringField("Original Title")
+    title = StringField("Title*", validators=[DataRequired(), Length(max=255)])
+    # original_title = StringField("Original Title")
     # content = StringField('Content', validators=[DataRequired()], widget=TextArea())
-    content = CKEditorField("Content", validators=[DataRequired()])
-    rate_type = SelectField("Type", choices=[e.value for e in TypeRate])
+    content = CKEditorField("Content", validators=[Length(max=500)])
+    rate_type = SelectField("Type*", choices=[e.value for e in TypeRate])
     rate_pic = FileField("Rate Pic")
     rate = RadioField(
-        "Rate",
+        "Rate*",
         validators=[DataRequired()],
         choices=[(5, "5"), (4, "4"), (3, "3"), (2, "2"), (1, "1")],
     )

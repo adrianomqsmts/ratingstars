@@ -5,7 +5,9 @@
 {% block content %}
 
 {% for category, message in get_flashed_messages(with_categories=True) %}
-<div class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show" role="alert">
+<div
+  class="alert alert-{{ 'primary' if category=='message' else category if category else 'primary' }} alert-dismissible fade show"
+  role="alert">
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
   <strong>{{message}}</strong>
 </div>
@@ -15,29 +17,24 @@
   <div class="login-form">
     <div class="card text-start">
       <div class="card-body text-dark">
+        <a name="voltar" class="btn btn-outline-secondary" href="{{ url_for('ratebp.dashboard') }}" role="button">Voltar</a>
         <h4 class="card-title text-center">Rate</h4>
         <hr>
         <form action="" method="POST">
           {{form.hidden_tag()}}
-          {{form.title.label(class="form-label")}}*:
+          {{form.title.label(class="form-label")}}:
           <span class="form-text text-danger">
             {{form.title.errors[0]}}
           </span>
           {{form.title(class="form-control")}}
 
-          {{form.original_title.label(class="form-label")}}:
-          <span class="form-text text-danger">
-            {{form.original_title.errors[0]}}
-          </span>
-          {{form.original_title(class="form-control")}}
-
-          {{form.rate_type.label(class="form-label")}}*:
+          {{form.rate_type.label(class="form-label")}}:
           <span class="form-text text-danger">
             {{form.rate_type.errors[0]}}
           </span>
           {{form.rate_type(class="form-control")}}
 
-          {{form.content.label(class="form-label")}}*:
+          {{form.content.label(class="form-label")}}:
           <span class="form-text text-danger">
             {{form.content.errors[0]}}
           </span>
@@ -66,7 +63,7 @@
           {{form.submit(class="btn btn-primary w-100")}}
         </form>
         {{ ckeditor.load() }}
-        {{ ckeditor.config(name = 'content', value=rate.content, showWordCount = True) }}
+        {{ ckeditor.config(name = 'content', showWordCount = True) }}
       </div>
     </div>
   </div>
