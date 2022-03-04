@@ -128,9 +128,9 @@ def update() -> Response:
     Returns:
         Union[Response, str]: Dashboard | Update
     """
-    form = UpdateForm()
     id = current_user.id
     user = UsersModel.query.get_or_404(id)  # get current user if exists
+    form = UpdateForm(obj=user)
     if form.validate_on_submit():
         user.name = request.form["name"] 
         user.username = request.form["username"]
@@ -145,7 +145,6 @@ def update() -> Response:
             return redirect(url_for("userbp.update"))
     else:
         user.name = user.name if user.name else ''
-        form.about.data = user.about if user.about else ''
         return render_template("user/update.html", form=form, user=user)
 
 

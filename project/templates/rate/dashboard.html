@@ -58,45 +58,57 @@
 </div>
 
 <hr>
+<div class="row">
+  {% for rate in rates_page.items %}
+  <div class="col-md-6 pb-4">
+    <div class="card text-dark">
+      <div class="card-header">
+        <div class="d-flex flex-row-reverse">
+         <span>
+          {% for i in range(rate.rate) %}
+          <span class="fa fa-star checked"></span>
+          {% endfor %}
+          {% for i in range(5-rate.rate) %}
+          <span class="fa fa-star"></span>
+          {% endfor %} | {{ rate.rate_type.value }} | {{rate.date_posted.strftime('%Y-%m-%d')}}
+         </span>
+        </div>
+      </div>
+      <div class="card-body">
+        <h4 class="card-title text-center">
+          <a class="text-decoration-none text-dark" href="{{ url_for('ratebp.read', id=rate.id) }}">
+            <img class=" card-img-top img-fluid rate-pic-card"
+              src="{{ url_for('static', filename='images/' + (rate.rate_pic if rate.rate_pic else 'star.png')) }}"
+              alt="Rate Pic">
 
-{% for rate in rates_page.items %}
-<div class="card text-start text-dark mb-2">
-  <div class="card-body">
-    <div class="row w-100">
-      <div class="col-10">
-        <h4 class="card-title"><a href="{{ url_for('ratebp.read', id=rate.id) }}">{{rate.title}}{% if
-            rate.original_title %} | {{rate.original_title}}{% endif %}</a></h4>
-      </div>
-      <div class="col-2 d-flex">
-        <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="w-50 btn btn-primary"><i
-            class="fas fa-edit"></i></a>
-        <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="w-50 btn btn-danger"><i
-            class="far fa-trash-alt"></i></a>
-      </div>
-    </div>
-    <p class="card-text">
-      {% for i in range(rate.rate) %}
-      <span class="fa fa-star checked"></span>
-      {% endfor %}
-      {% for i in range(5-rate.rate) %}
-      <span class="fa fa-star"></span>
-      {% endfor %} | {{ rate.rate_type.value }} | {{rate.date_posted.strftime('%Y-%m-%d')}}
-    </p>
-    <hr>
-    <div class="row">
-      <div class="col-2">
-        <img class="img-fluid rate-pic border-dark"
-          src="{{ url_for('static', filename='images/' + (rate.rate_pic if rate.rate_pic else 'star.png')) }}"
-          alt="Rate Pic">
-
-      </div>
-      <div class="col-10">
-        <p class="card-text">{{rate.content|safe}}</p>
+            {{rate.title}}
+          </a>
+        </h4>
+        <p class="card-text text-justify text-break ">{{rate.content|safe}}</p>
+        <div class="card-text d-flex w-100">
+          <a href="{{ url_for('ratebp.update', id=rate.id) }}" class="w-50 btn btn-primary"><i class="fas fa-edit"></i></a>
+          <a href="{{ url_for('ratebp.delete', id=rate.id) }}" class="w-50 btn btn-danger"><i
+              class="far fa-trash-alt"></i></a>
+        </div>
       </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {% endfor %}
 </div>
-{% endfor %}
 
 <nav aria-label="Page navigation">
   <ul class="pagination justify-content-center">

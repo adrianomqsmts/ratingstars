@@ -37,8 +37,7 @@ def dashboard() -> Response:
     Returns:
         template: Dashboard
     """
-    rates = RatingModel.query.filter_by(rater_id=current_user.id)
-    total_rate = rates.count()
+    rates = RatingModel.query.filter_by(rater_id=current_user.id).order_by(RatingModel.date_posted.desc())
     page = request.args.get("page", 1, type=int)
     rates_page = rates.paginate(page=page, per_page=10)
     return render_template("rate/dashboard.html", rates_page=rates_page)
@@ -62,12 +61,11 @@ def create() -> Response:
             # verify if rate_type exists on Enum class
             type_rate = TypeRate(form.rate_type.data).name
         except:
-            type_rate = None
-            flash("Wrong Type Selected! :(", category="danger")
+            type_rate = "ANIME"
+            flash("Wrong Type Selected! :(, ANIME selected", category="danger")
         finally:
             rate_pic = image_upload(request.files["rate_pic"])
             new_rate = RatingModel(
-                original_title=form.original_title.data,
                 title=form.title.data,
                 content=form.content.data,
                 rate=int(form.rate.data),
@@ -102,11 +100,10 @@ def update(id: int) -> Response:
         Response: Dashboard | Update
     """
     rate = RatingModel.query.get_or_404(id)
-    form = RateForm(rate_type=rate.rate_type.value)  # preselect that rate_type
+    form = RateForm(obj=rate)  # preselect that rate_type
     if current_user.id == rate.rater_id:
         if form.validate_on_submit():
             rate.title = form.title.data
-            rate.original_title = form.original_title.data
             rate.content = form.content.data
             rate.rate = form.rate.data
             try:
@@ -122,9 +119,8 @@ def update(id: int) -> Response:
             except:
                 flash("Wrong Type Selected! :(", category="danger")
                 return redirect(url_for("ratebp.update", id=id))
-
-        form.rate.default = rate.rate
-        form.content.data = rate.content
+        # Rate type conversion
+        form.rate_type.data = rate.rate_type.value
         return render_template("rate/update_rate.html", form=form, rate=rate)
     else:
         flash("You bot allowed to edit that rate!", category="warning")
@@ -198,10 +194,9 @@ def search() -> Response:
         search = form.search.data
 
         title_query = RatingModel.title.like("%" + search + "%")
-        title_original_query = RatingModel.original_title.like("%" + search + "%")
         type_rate_query = RatingModel.rate_type.like("%" + search + "%")
 
-        rating = rating.filter(or_(title_query, title_original_query, type_rate_query))
+        rating = rating.filter(or_(title_query, type_rate_query))
         rating = rating.order_by(RatingModel.date_posted).all()
         return render_template("rate/search_result.html", search=search, rating=rating)
     else:

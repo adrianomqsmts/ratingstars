@@ -19,19 +19,13 @@
         <hr>
         <form action="" method="POST" enctype="multipart/form-data">
           {{form.hidden_tag()}}
-          {{form.title.label(class="form-label")}}*:
+          {{form.title.label(class="form-label")}}:
           <span class="form-text text-danger">
             {{form.title.errors[0]}}
           </span>
           {{form.title(class="form-control")}}
 
-          {{form.original_title.label(class="form-label")}}:
-          <span class="form-text text-danger">
-            {{form.original_title.errors[0]}}
-          </span>
-          {{form.original_title(class="form-control")}}
-
-          {{form.rate_type.label(class="form-label")}}*:
+          {{form.rate_type.label(class="form-label")}}:
           <span class="form-text text-danger">
             {{form.rate_type.errors[0]}}
           </span>
@@ -43,13 +37,13 @@
           </span>
           {{form.rate_pic(class="form-control")}}
 
-          {{form.content.label(class="form-label")}}*:
+          {{form.content.label(class="form-label")}}:
           <span class="form-text text-danger">
             {{form.content.errors[0]}}
           </span>
           {{form.content(class="form-control")}}
           <br>
-          {{form.rate.label(class="form-label")}}*:
+          {{form.rate.label(class="form-label")}}:
           <span class="form-text text-danger">
             {{form.rate.errors[0]}}
           </span>
