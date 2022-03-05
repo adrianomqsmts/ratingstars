@@ -35,5 +35,5 @@ jobs:
       #  run: python -m pydocstyle app.py
 
       - name: Executa os testes unitários
-        run: python -m pytest
+        run: python -m pytest -x
       
