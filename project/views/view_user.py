@@ -92,30 +92,33 @@ def register() -> Response:
         Union[Response, str]: Login | Register
     """
     form = UserForm()
-    if form.validate_on_submit():  # Verify form fields
-        email = UsersModel().query.filter_by(email=form.email.data).first()
-        username = UsersModel().query.filter_by(email=form.email.data).first()
-        if (username is None) and (email is None):
-            new_user = UsersModel(
-                username=form.username.data,
-                email=form.email.data,
-                password=form.password.data,
-            )
+    if not current_user.is_authenticated:
+        if form.validate_on_submit():  # Verify form fields
+            email = UsersModel().query.filter_by(email=form.email.data).first()
+            username = UsersModel().query.filter_by(email=form.email.data).first()
+            if (username is None) and (email is None):
+                new_user = UsersModel(
+                    username=form.username.data,
+                    email=form.email.data,
+                    password=form.password.data,
+                )
 
-            try:  # Save in Database
-                db.session.add(new_user)
-                db.session.commit()
-                flash("User added Successfully", category="success")
-                return redirect(url_for("userbp.login"))
-            except:
-                flash("error with Database :)", category="danger")
-                return redirect(url_for("userbp.register"))
-        else:
-            flash("Username or email Already Exists", category="info")
-        # Clear the form
-        form.password.data = ""
+                try:  # Save in Database
+                    db.session.add(new_user)
+                    db.session.commit()
+                    flash("User added Successfully", category="success")
+                    return redirect(url_for("userbp.login"))
+                except:
+                    flash("error with Database :)", category="danger")
+                    return redirect(url_for("userbp.register"))
+            else:
+                flash("Username or email Already Exists", category="info")
+            # Clear the form
+            form.password.data = ""
 
-    return render_template("user/register.html", form=form)
+        return render_template("user/register.html", form=form)
+    else:
+        return redirect(url_for("ratebp.dashboard"))
 
 
 @userbp.route("/update", methods=["GET", "POST"])
