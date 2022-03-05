@@ -12,7 +12,7 @@ from project.forms.form_rate import RateForm, SearchForm
 from project.forms.form_season import SeasonForm
 from project.forms.form_user import LoginForm, UpdateForm, UpdatePicForm, UserForm
 from project.models import model_admin, model_rate, model_season, model_user
-from project.views.view_handler import handlerbp
+from project.views.view_handler import errorsbp
 from project.views.view_rate import ratebp
 from project.views.view_season import seasonbp
 from project.views.view_user import userbp
@@ -26,7 +26,7 @@ db = server.db
 app.register_blueprint(userbp, url_prefix="/user")
 app.register_blueprint(ratebp)
 app.register_blueprint(seasonbp, url_prefix="/season")
-app.register_blueprint(handlerbp, url_prefix="/season")
+app.register_blueprint(errorsbp)
 
 # Login
 login_manager = server.login_manager
@@ -70,6 +70,7 @@ def index() -> Response:
     return render_template("index.html")
 
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+if __name__ == "__main__": # pragma: no cover
+    db = server.create_database() 
+    port = int(os.environ.get("PORT", 5000)) 
+    app.run(host="0.0.0.0", port=port, debug=True) 

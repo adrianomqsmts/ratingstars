@@ -58,8 +58,10 @@ def login() -> Response:
                 login_user(user, remember=remember)  # login that user
                 return redirect(url_for("ratebp.dashboard"))
             else:
+                logout_user()
                 flash("Wrong Username or Password - Try Again!", category="warning")
         else:
+            logout_user()
             flash("That User do not exists - Try Again!", category="warning")
     return render_template("user/login.html", form=form)
 
@@ -132,7 +134,7 @@ def update() -> Response:
     user = UsersModel.query.get_or_404(id)  # get current user if exists
     form = UpdateForm(obj=user)
     if form.validate_on_submit():
-        user.name = request.form["name"] 
+        user.name = request.form["name"]
         user.username = request.form["username"]
         user.about = request.form["about"]
         try:
@@ -144,7 +146,7 @@ def update() -> Response:
             flash("Error with database", category="danger")
             return redirect(url_for("userbp.update"))
     else:
-        user.name = user.name if user.name else ''
+        user.name = user.name if user.name else ""
         return render_template("user/update.html", form=form, user=user)
 
 

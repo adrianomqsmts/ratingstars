@@ -31,6 +31,13 @@ def image_upload(file: object) -> Optional[str]:
         return None
 
 
+def image_remove(name_old_file: str) -> Optional[str]:
+    if name_old_file and os.path.isfile(os.path.join(PATH, name_old_file)):
+        os.remove(os.path.join(PATH, name_old_file))  # Remove file if exists
+        return name_old_file
+    else:
+        return None
+
 def image_remove_and_upload(new_file: object, name_old_file: str) -> Optional[str]:
     """Remove a imagem antiga, e adicionar uma nova imagem no servidor.
 
