@@ -1,0 +1,27 @@
+name: Deploy Automático
+
+on: 
+  workflow_run:
+    workflows: ["Integração Contínua"]
+    branches: [main]
+    type:
+      - completed 
+
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Login to Heroku Container registry
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:login
+
+    - name: Build and push
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:push web --app ratingstars
+
+    - name: Release
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      run: heroku container:release web -app ratingstars

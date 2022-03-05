@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_ckeditor import CKEditor
+import os
 
 # Login
 from flask_login import LoginManager, current_user
@@ -30,10 +31,11 @@ from project.admin import *
 app = Flask(__name__)
 app.config.from_object("project.config")
 
+
 # Initialize
 db.init_app(app)
 db.app = app
-db.create_all()
+# db.create_all()
 migrate = Migrate(app, db)
 ckeditor = CKEditor()
 ckeditor.init_app(app)
@@ -116,6 +118,3 @@ def page_not_found(e):
 def error_on_server(e):
     return render_template("error/500.html"), 500
 
-
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=8000, debug=True)
