@@ -1,10 +1,12 @@
 # Flask - Rating Stars
 
-Um site web com sistema de login e de administração. O site funciona como um diário de séries ou filmes, em que permite adicionar avaliações pessoais para cada entretenimento de forma individual, além de poder avaliar cada temporada. 
+Um site web com sistema de login e de administração. O site funciona como um diário de séries e filmes, em que permite adicionar avaliações pessoais para cada entretenimento, além de poder avaliar cada temporada de forma individual. 
 
-Projeto de Estudos em andamento onde aplivo conhecimento de: Python, Flask e suas bibliotecas, Pytest, Git e GitHub Actions, Docker, Heroku, HTML/CSS, Bootstrap, dentre outros.
+Este é um projeto de estudos, que esta **em andamento** onde aplico diversos conhecimentos como: Python, Flask e suas bibliotecas, Pytest, Git e GitHub Actions, Docker, Heroku, HTML/CSS, Bootstrap, dentre outros.
 
-Parte da Integração Contínua está conluída, com verificação do linter black e docsting com o pydocstring, faltando a automação e criação dos testes que estão em andamento. A implatação automática está sendo realizada com sucessso, após o CI, com o uso de containers e o Heroku. 
+## CI-CD
+
+Parte da Integração Contínua está conluída, com verificação do linter `black` e docsting com o `pydocstring`, faltando a automação e criação dos testes com o `pytest` que estão em desenvolvimento. A Entrega Contínua (CD) está sendo realizada com sucessso, após o CI, com o uso de containers e o Heroku. 
 
 ## 💻 Páginas 
 
