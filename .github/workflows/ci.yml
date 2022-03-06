@@ -25,15 +25,15 @@ jobs:
       - name: Requirements
         run: python -m pip install -r requirements.txt
 
-      #- name: Executa o Black
-      #  run: python -m black app.py
+      - name: Executa o Black
+        run:  python -m black --check project/
 
       #- name: Executa o isort
       #  run: python -m isort app.py --check
 
-      #- name: Executa o pydocstyle
-      #  run: python -m pydocstyle app.py
+      - name: Executa o pydocstyle
+        run:  python -m pydocstyle project/
 
-      - name: Pytest
-        run: python -m pytest -x -v
+      #- name: Pytest
+      #  run: python -m pytest -x -v
       
