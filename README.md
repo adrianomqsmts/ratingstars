@@ -2,11 +2,15 @@
 
 Um site web com sistema de login e de administração. O site funciona como um diário de séries ou filmes, em que permite adicionar avaliações pessoais para cada entretenimento de forma individual, além de poder avaliar cada temporada. 
 
+Projeto de Estudos em andamento onde aplivo conhecimento de: Python, Flask e suas bibliotecas, Pytest, Git e GitHub Actions, Docker, Heroku, HTML/CSS, Bootstrap, dentre outros.
+
+Parte da Integração Contínua está conluída, com verificação do linter black e docsting com o pydocstring, faltando a automação e criação dos testes que estão em andamento. A implatação automática está sendo realizada com sucessso, após o CI, com o uso de containers e o Heroku. 
+
 ## 💻 Páginas 
 
 - Páginas principal
 
-![](readme/dashboard.png)
+![](readme/dashboard(1).png)
 
 - Páginas de temporadas 
 
@@ -56,6 +60,8 @@ Ferramentas, linguagens e outras tecnologias usadas no desenvolvimento deste sis
   * flask-sqlalchemy
   * flask-migrate
   * flask-ckeditor
+* [CI-CD](https://pt.wikipedia.org/wiki/CI/CD)
+* [GitHub Actions](https://docs.github.com/en/actions)
 * ...
 
 ## ✒️ Autores
