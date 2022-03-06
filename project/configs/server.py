@@ -26,7 +26,7 @@ class __Server:
         self.ckeditor = CKEditor()
         self.login_manager = LoginManager()
 
-    def configure(self) -> bool: # pragma: no cover
+    def configure(self) -> bool:  # pragma: no cover
         """Configura a aplicação, o banco de dados, CKEditor e cria a base de dados.
 
         Returns:
@@ -41,11 +41,11 @@ class __Server:
         except:
             return False
 
-    def run(self) -> Flask: # pragma: no cover
+    def run(self) -> Flask:  # pragma: no cover
         """Executar o Servidor."""
         self.app.run()
         return self.app
-    
+
     def create_database(self, app) -> SQLAlchemy:  # pragma: no cover
         with self.app.test_request_context():
             db = SQLAlchemy()

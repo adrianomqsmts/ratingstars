@@ -3,13 +3,9 @@
 from flask_ckeditor import CKEditorField
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField
-from wtforms import (
-    RadioField,
-    SelectField,
-    StringField,
-    SubmitField,
-)
+from wtforms import RadioField, SelectField, StringField, SubmitField
 from wtforms.validators import DataRequired, Length
+
 from project.models.model_rate import TypeRate
 
 

@@ -33,11 +33,13 @@ def dashboard() -> Response:
     Decorators:
         @Login_required
         methods=["GET"]
-        
+
     Returns:
         template: Dashboard
     """
-    rates = RatingModel.query.filter_by(rater_id=current_user.id).order_by(RatingModel.date_posted.desc())
+    rates = RatingModel.query.filter_by(rater_id=current_user.id).order_by(
+        RatingModel.date_posted.desc()
+    )
     page = request.args.get("page", 1, type=int)
     rates_page = rates.paginate(page=page, per_page=10)
     return render_template("rate/dashboard.html", rates_page=rates_page)
@@ -180,11 +182,11 @@ def read(id: int) -> Response:
 @login_required
 def search() -> Response:
     """View de Controle e Pesquisa de Avaliação.
-    
+
     Decorators:
         @Login_required
         methods=["POST"]
-        
+
     Returns:
         Response: Result
     """

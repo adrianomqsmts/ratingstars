@@ -3,9 +3,10 @@
 import os
 import uuid as uuid
 from typing import Optional
-from project.configs.server import server
 
 from werkzeug.utils import secure_filename
+
+from project.configs.server import server
 
 PATH = "project/static/images/"
 
@@ -37,6 +38,7 @@ def image_remove(name_old_file: str) -> Optional[str]:
         return name_old_file
     else:
         return None
+
 
 def image_remove_and_upload(new_file: object, name_old_file: str) -> Optional[str]:
     """Remove a imagem antiga, e adicionar uma nova imagem no servidor.

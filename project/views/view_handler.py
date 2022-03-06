@@ -1,15 +1,13 @@
 """View de controle de requisições de error da aplicação como 404 e 500."""
-from project.configs.server import server
-from flask import (
-    Blueprint,
-    Response,
-    render_template,
-)
+from flask import Blueprint, Response, render_template
 
-errorsbp = Blueprint('errors', __name__)
+from project.configs.server import server
+
+errorsbp = Blueprint("errors", __name__)
+
 
 @errorsbp.app_errorhandler(404)
-def handle_404(err)->Response:
+def handle_404(err) -> Response:
     """Page not found.
 
     Args:
@@ -18,7 +16,8 @@ def handle_404(err)->Response:
     Returns:
         Response: template, 404
     """
-    return render_template('error/404.html'), 404
+    return render_template("error/404.html"), 404
+
 
 @errorsbp.app_errorhandler(500)
 def handle_500(err):
@@ -30,4 +29,4 @@ def handle_500(err):
     Returns:
         Response: template, 500
     """
-    return render_template('error/500.html'), 500
+    return render_template("error/500.html"), 500
