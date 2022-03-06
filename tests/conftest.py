@@ -2,8 +2,7 @@ from email.mime import application
 from unicodedata import name
 from flask_login import login_user, logout_user
 import pytest
-from app import app as application
-from app import db
+from project.configs.server import server
 from app import model_user, url_for, login_manager
 import os
 from werkzeug.datastructures import FileStorage
@@ -17,7 +16,8 @@ def runner(app):
 
 @pytest.fixture(scope="session")
 def app(request):
-    from app import app
+    app = server.app
+    server.configure()
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bd-teste2.sqlite3'
     app.config['DEBUG'] = True
     app.config['TESTING'] = True 
@@ -48,7 +48,7 @@ def client(app_context):
 def db(app_context):
 
     # extensions pattern explained in here https://stackoverflow.com/a/42910185/5819113
-    from app import db
+    db = server.db
 
     db.create_all()
 
