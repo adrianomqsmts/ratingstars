@@ -20,6 +20,7 @@ from project.views.view_user import userbp
 # Sever Variables
 server.configure()
 app = server.app
+db = server.create_database()
 
 # BluePrints
 app.register_blueprint(userbp, url_prefix="/user")
@@ -70,6 +71,6 @@ def index() -> Response:
 
 
 if __name__ == "__main__":  # pragma: no cover
-    db = server.create_database(app)
+    db = server.create_database()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
