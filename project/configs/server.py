@@ -46,8 +46,9 @@ class __Server:
         self.app.run()
         return self.app
     
-    def create_database(self) -> SQLAlchemy:  # pragma: no cover
+    def create_database(self, app) -> SQLAlchemy:  # pragma: no cover
         with self.app.test_request_context():
+            self.db.init_app(app=app)
             self.db.create_all()
         return self.db
 

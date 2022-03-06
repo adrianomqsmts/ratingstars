@@ -47,7 +47,7 @@ def client(app_context):
 @pytest.fixture()
 def db(app_context):
 
-    db = server.create_database()
+    db = server.create_database(app_context)
 
     # seed the database
     user = model_user.UsersModel(
