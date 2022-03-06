@@ -1,8 +1,8 @@
-name: Deploy Automático
+name: CD
 
 on: 
   workflow_run:
-    workflows: ["Integração Contínua"]
+    workflows: ["CI"]
     branches: [main]
     type:
       - completed 
