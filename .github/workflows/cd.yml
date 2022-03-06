@@ -6,22 +6,31 @@ on:
     branches: [main]
     type:
       - completed 
+jobs:
+  executa_linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Realiza o checkout # Clona o repositório para a máquina do workflow
+        uses: actions/checkout@v2
+      
+      - name: Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Checkout
+        uses: actions/checkout@v1
 
-  steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+      - name: Login to Heroku Container registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
 
-    - name: Login to Heroku Container registry
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:login
+      - name: Build and push
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push web --app ratingstars
 
-    - name: Build and push
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:push web --app ratingstars
-
-    - name: Release
-      env:
-        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      run: heroku container:release web -app ratingstars
+      - name: Release
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release web -app ratingstars
