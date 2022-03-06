@@ -47,7 +47,6 @@ def client(app_context):
 @pytest.fixture()
 def db(app_context):
 
-    # extensions pattern explained in here https://stackoverflow.com/a/42910185/5819113
     db = server.db
 
     db.create_all()
